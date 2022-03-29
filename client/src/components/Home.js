@@ -62,7 +62,7 @@ const Home = ({ user, logout }) => {
     });
   };
 
-  // Needs to be async because of interaction with db
+  // needs to be async because of interaction with db
   const postMessage = async (body) => {
     try {
       const data = await saveMessage(body);
@@ -79,6 +79,7 @@ const Home = ({ user, logout }) => {
     }
   };
 
+  // fake convo will already be loaded, preventing conversations array from being empty
   const addNewConvo = useCallback(
     (recipientId, message) => {
       setConversations((currentConvos) => {
@@ -95,7 +96,6 @@ const Home = ({ user, logout }) => {
     [setConversations, conversations]
   );
 
-  // Source of issue #1 (found via DevTools)
   const addMessageToConversation = useCallback(
     (data) => {
       console.log(data, "<= data");
@@ -107,19 +107,11 @@ const Home = ({ user, logout }) => {
         const newConvo = {
           id: message.conversationId,
           otherUser: sender,
-          messages: [message], // An array with just the one message
+          messages: [message], // an array with just the one message
         };
         newConvo.latestMessageText = message.text;
-        // setConversations((prev) => [newConvo, ...prev]); // prepending?
-        setConversations((prev) => [...prev, newConvo]); // state change case #1
+        setConversations((prev) => [newConvo, ...prev]); // state change case #1
       }
-
-      // conversations.forEach((convo) => {
-      //   if (convo.id === message.conversationId) {
-      //     convo.messages.push(message);
-      //     convo.latestMessageText = message.text;
-      //   }
-      // });
 
       setConversations((currentConvos) => {
         // state change case #2
