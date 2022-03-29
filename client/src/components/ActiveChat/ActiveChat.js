@@ -1,24 +1,25 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Box } from '@material-ui/core';
-import { Input, Header, Messages } from './index';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
+import { Input, Header, Messages } from "./index";
 
 const useStyles = makeStyles(() => ({
   root: {
-    display: 'flex',
+    display: "flex",
     flexGrow: 8,
-    flexDirection: 'column',
+    flexDirection: "column",
   },
   chatContainer: {
     marginLeft: 41,
     marginRight: 41,
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
     flexGrow: 1,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
 }));
 
+// postMessage() is passed down from <Home />
 const ActiveChat = ({
   user,
   conversations,
@@ -32,6 +33,8 @@ const ActiveChat = ({
         (conversation) => conversation.otherUser.username === activeConversation
       )
     : {};
+
+  console.log(conversation, "<= conversation");
 
   const isConversation = (obj) => {
     return obj !== {} && obj !== undefined;

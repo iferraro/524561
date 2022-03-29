@@ -62,9 +62,10 @@ const Home = ({ user, logout }) => {
     });
   };
 
-  const postMessage = (body) => {
+  // Needs to be async because of interaction with db
+  const postMessage = async (body) => {
     try {
-      const data = saveMessage(body);
+      const data = await saveMessage(body);
 
       if (!body.conversationId) {
         addNewConvo(body.recipientId, data.message);
@@ -80,40 +81,58 @@ const Home = ({ user, logout }) => {
 
   const addNewConvo = useCallback(
     (recipientId, message) => {
-      conversations.forEach((convo) => {
-        if (convo.otherUser.id === recipientId) {
-          convo.messages.push(message);
-          convo.latestMessageText = message.text;
-          convo.id = message.conversationId;
-        }
+      setConversations((currentConvos) => {
+        return currentConvos.map((convo) => {
+          if (convo.otherUser.id === recipientId) {
+            convo.messages = [message];
+            convo.latestMessageText = message.text;
+            convo.id = message.conversationId;
+          }
+          return convo;
+        });
       });
-      setConversations(conversations);
     },
-    [setConversations, conversations],
+    [setConversations, conversations]
   );
+
+  // Source of issue #1 (found via DevTools)
   const addMessageToConversation = useCallback(
     (data) => {
+      console.log(data, "<= data");
       // if sender isn't null, that means the message needs to be put in a brand new convo
-      const { message, sender = null } = data;
+
+      const { message, sender = null } = data; // AKA sender becomes null if contact has been made before
+
       if (sender !== null) {
         const newConvo = {
           id: message.conversationId,
           otherUser: sender,
-          messages: [message],
+          messages: [message], // An array with just the one message
         };
         newConvo.latestMessageText = message.text;
-        setConversations((prev) => [newConvo, ...prev]);
+        // setConversations((prev) => [newConvo, ...prev]); // prepending?
+        setConversations((prev) => [...prev, newConvo]); // state change case #1
       }
 
-      conversations.forEach((convo) => {
-        if (convo.id === message.conversationId) {
-          convo.messages.push(message);
-          convo.latestMessageText = message.text;
-        }
+      // conversations.forEach((convo) => {
+      //   if (convo.id === message.conversationId) {
+      //     convo.messages.push(message);
+      //     convo.latestMessageText = message.text;
+      //   }
+      // });
+
+      setConversations((currentConvos) => {
+        // state change case #2
+        return currentConvos.map((convo) => {
+          if (convo.id === message.conversationId) {
+            convo.messages = [...convo.messages, message];
+            convo.latestMessageText = message.text;
+          }
+          return convo;
+        });
       });
-      setConversations(conversations);
     },
-    [setConversations, conversations],
+    [setConversations, conversations]
   );
 
   const setActiveChat = (username) => {
@@ -130,7 +149,7 @@ const Home = ({ user, logout }) => {
         } else {
           return convo;
         }
-      }),
+      })
     );
   }, []);
 
@@ -144,7 +163,7 @@ const Home = ({ user, logout }) => {
         } else {
           return convo;
         }
-      }),
+      })
     );
   }, []);
 
