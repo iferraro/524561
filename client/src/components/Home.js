@@ -62,7 +62,6 @@ const Home = ({ user, logout }) => {
     });
   };
 
-  // needs to be async because of interaction with db
   const postMessage = async (body) => {
     try {
       const data = await saveMessage(body);
@@ -79,7 +78,6 @@ const Home = ({ user, logout }) => {
     }
   };
 
-  // fake convo will already be loaded, preventing conversations array from being empty
   const addNewConvo = useCallback(
     (recipientId, message) => {
       setConversations((currentConvos) => {
@@ -93,28 +91,25 @@ const Home = ({ user, logout }) => {
         });
       });
     },
-    [setConversations, conversations]
+    [setConversations]
   );
 
   const addMessageToConversation = useCallback(
     (data) => {
-      console.log(data, "<= data");
       // if sender isn't null, that means the message needs to be put in a brand new convo
-
-      const { message, sender = null } = data; // AKA sender becomes null if contact has been made before
+      const { message, sender = null } = data;
 
       if (sender !== null) {
         const newConvo = {
           id: message.conversationId,
           otherUser: sender,
-          messages: [message], // an array with just the one message
+          messages: [message],
         };
         newConvo.latestMessageText = message.text;
-        setConversations((prev) => [newConvo, ...prev]); // state change case #1
+        setConversations((prev) => [newConvo, ...prev]);
       }
 
       setConversations((currentConvos) => {
-        // state change case #2
         return currentConvos.map((convo) => {
           if (convo.id === message.conversationId) {
             convo.messages = [...convo.messages, message];
@@ -124,7 +119,7 @@ const Home = ({ user, logout }) => {
         });
       });
     },
-    [setConversations, conversations]
+    [setConversations]
   );
 
   const setActiveChat = (username) => {

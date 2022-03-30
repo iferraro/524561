@@ -19,7 +19,6 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-// postMessage() is passed down from <Home />
 const ActiveChat = ({
   user,
   conversations,
@@ -33,8 +32,6 @@ const ActiveChat = ({
         (conversation) => conversation.otherUser.username === activeConversation
       )
     : {};
-
-  console.log(conversation, "<= conversation");
 
   const isConversation = (obj) => {
     return obj !== {} && obj !== undefined;

@@ -19,9 +19,9 @@ router.get("/", async (req, res, next) => {
         },
       },
       attributes: ["id"],
-      order: [[Message, "createdAt"]], // should be ascending for chronological order (SQL default)
+      order: [[Message, "createdAt"]],
       include: [
-        { model: Message, order: ["createdAt"] }, // should also be ascending
+        { model: Message, order: ["createdAt"] },
         {
           model: User,
           as: "user1",
