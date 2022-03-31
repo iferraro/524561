@@ -1,7 +1,7 @@
 const { Sequelize } = require("@sequelize/core");
 
 const db = new Sequelize(
-  "messenger", "postgres", "Phyll0phaga",
+  "messenger", "postgres", "Phyll0ph@ga",
   {
     host: "localhost",
     dialect: "postgres",
