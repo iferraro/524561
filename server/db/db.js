@@ -1,13 +1,9 @@
+require("dotenv").config();
 const { Sequelize } = require("@sequelize/core");
 
-const db = new Sequelize(
-  "messenger", "postgres", "Phyll0ph@ga",
-  {
-    host: "localhost",
-    dialect: "postgres",
-    logging: false,
-  }
-);
+const db = new Sequelize(process.env.DATABASE_URL, {
+  logging: false,
+});
 
 const auth = async () => {
   try {
