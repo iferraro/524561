@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import {
   Grid,
   Box,
@@ -8,10 +8,7 @@ import {
   FormControl,
   TextField,
   FormHelperText,
-} from "@material-ui/core";
-import ThreeFriends from "./components/SignUpLogIn/ThreeFriends";
-import BlueButton from "./components/SignUpLogIn/BlueButton";
-import WhiteButton from "./components/SignUpLogIn/WhiteButton";
+} from '@material-ui/core';
 
 const Signup = ({ user, register }) => {
   const history = useHistory();
@@ -28,73 +25,82 @@ const Signup = ({ user, register }) => {
     const confirmPassword = formElements.confirmPassword.value;
 
     if (password !== confirmPassword) {
-      setFormErrorMessage({ confirmPassword: "Passwords must match" });
+      setFormErrorMessage({ confirmPassword: 'Passwords must match' });
       return;
     }
     await register({ username, email, password });
   };
 
   useEffect(() => {
-    if (user && user.id) history.push("/home");
+    if (user && user.id) history.push('/home');
   }, [user, history]);
 
   return (
-    <Grid container justifyContent="flex-start">
-      <Box sx={{ backgroundColor: "#004056" }}>
-        <ThreeFriends />
-      </Box>
-      <Box sx={{ backgroundColor: "#AEA98B" }}>
-        <Typography>Need to log in?</Typography>
-        <Link href="/login" to="/login" underline="none">
-          <WhiteButton text="Login" />
-        </Link>
+    <Grid container justifyContent="center">
+      <Box>
+        <Grid container item>
+          <Typography>Need to log in?</Typography>
+          <Link href="/login" to="/login">
+            <Button>Login</Button>
+          </Link>
+        </Grid>
         <form onSubmit={handleRegister}>
           <Grid>
-            <FormControl>
-              <TextField
-                aria-label="username"
-                label="Username"
-                name="username"
-                type="text"
-                required
-              />
-            </FormControl>
-            <FormControl>
-              <TextField
-                label="E-mail address"
-                aria-label="e-mail address"
-                type="email"
-                name="email"
-                required
-              />
-            </FormControl>
-            <FormControl error={!!formErrorMessage.confirmPassword}>
-              <TextField
-                aria-label="password"
-                label="Password"
-                type="password"
-                inputProps={{ minLength: 6 }}
-                name="password"
-                required
-              />
-              <FormHelperText>
-                {formErrorMessage.confirmPassword}
-              </FormHelperText>
-            </FormControl>
-            <FormControl error={!!formErrorMessage.confirmPassword}>
-              <TextField
-                label="Confirm Password"
-                aria-label="confirm password"
-                type="password"
-                inputProps={{ minLength: 6 }}
-                name="confirmPassword"
-                required
-              />
-              <FormHelperText>
-                {formErrorMessage.confirmPassword}
-              </FormHelperText>
-            </FormControl>
-            <BlueButton text="Create" />
+            <Grid>
+              <FormControl>
+                <TextField
+                  aria-label="username"
+                  label="Username"
+                  name="username"
+                  type="text"
+                  required
+                />
+              </FormControl>
+            </Grid>
+            <Grid>
+              <FormControl>
+                <TextField
+                  label="E-mail address"
+                  aria-label="e-mail address"
+                  type="email"
+                  name="email"
+                  required
+                />
+              </FormControl>
+            </Grid>
+            <Grid>
+              <FormControl error={!!formErrorMessage.confirmPassword}>
+                <TextField
+                  aria-label="password"
+                  label="Password"
+                  type="password"
+                  inputProps={{ minLength: 6 }}
+                  name="password"
+                  required
+                />
+                <FormHelperText>
+                  {formErrorMessage.confirmPassword}
+                </FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid>
+              <FormControl error={!!formErrorMessage.confirmPassword}>
+                <TextField
+                  label="Confirm Password"
+                  aria-label="confirm password"
+                  type="password"
+                  inputProps={{ minLength: 6 }}
+                  name="confirmPassword"
+                  required
+                />
+                <FormHelperText>
+                  {formErrorMessage.confirmPassword}
+                </FormHelperText>
+              </FormControl>
+            </Grid>
+            <Button type="submit" variant="contained" size="large">
+              Create
+            </Button>
           </Grid>
         </form>
       </Box>
