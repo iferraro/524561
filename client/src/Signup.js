@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {
-  Grid,
+  // div,
   Box,
   Typography,
-  Button,
   FormControl,
+  InputLabel,
+  Input,
   TextField,
   FormHelperText,
+  makeStyles,
 } from "@material-ui/core";
-// import { classes } from "./themes/signuplogin";
+import { sharedClasses } from "./themes/signuplogin";
 import ThreeFriends from "./components/SignUpLogIn/ThreeFriends";
 import BlueButton from "./components/SignUpLogIn/BlueButton";
 import WhiteButton from "./components/SignUpLogIn/WhiteButton";
@@ -39,71 +41,76 @@ const Signup = ({ user, register }) => {
     if (user && user.id) history.push("/home");
   }, [user, history]);
 
+  const useStyles = makeStyles(() => {
+    return sharedClasses;
+  });
+
+  const signupClasses = useStyles();
+
   return (
-    <Grid container spacing={0}>
-        <ThreeFriends />
-      <Grid item sx={{ backgroundColor: "#AEA98B" }}>
-        <Typography>Need to log in?</Typography>
-        <Link href="/login" to="/login" underline="none">
-          <WhiteButton text="Login" />
-        </Link>
-        <form onSubmit={handleRegister}>
-          <Grid>
-            <FormControl>
-              <TextField
-                aria-label="username"
-                label="Username"
-                name="username"
-                type="text"
-                required
-              />
-            </FormControl>
-          </Grid>
-          <Grid>
-            <FormControl>
-              <TextField
-                label="E-mail address"
-                aria-label="e-mail address"
-                type="email"
-                name="email"
-                required
-              />
-            </FormControl>
-          </Grid>
-          <Grid>
-            <FormControl error={!!formErrorMessage.confirmPassword}>
-              <TextField
-                aria-label="password"
-                label="Password"
-                type="password"
-                inputProps={{ minLength: 6 }}
-                name="password"
-                required
-              />
-              <FormHelperText>
-                {formErrorMessage.confirmPassword}
-              </FormHelperText>
-            </FormControl>
-          </Grid>
-          <Grid>
-            <FormControl error={!!formErrorMessage.confirmPassword}>
-              <TextField
-                label="Confirm Password"
-                aria-label="confirm password"
-                type="password"
-                inputProps={{ minLength: 6 }}
-                name="confirmPassword"
-                required
-              />
-              <FormHelperText>
-                {formErrorMessage.confirmPassword}
-              </FormHelperText>
-            </FormControl>
-          </Grid>
-          <BlueButton text="Create" />
+    <div className={signupClasses.root}>
+      <ThreeFriends />
+      <div className={signupClasses.formSide}>
+        <div className={signupClasses.topLinePrompt}>
+          <Typography>Already have an account?</Typography>
+          <Link href="/login" to="/login" underline="none">
+            <WhiteButton text="Login" />
+          </Link>
+        </div>
+        <form onSubmit={handleRegister} className={signupClasses.forms}>
+          <heading className={signupClasses.heading}>
+            Create an account.
+          </heading>
+          <FormControl>
+            <InputLabel>Username</InputLabel>
+            <Input
+              type="text"
+              name="username"
+              aria-label="username"
+              className={signupClasses.input}
+              required
+            />
+          </FormControl>
+          <FormControl>
+            <InputLabel>E-mail address</InputLabel>
+            <Input
+              type="email"
+              name="email"
+              aria-label="e-mail address"
+              className={signupClasses.input}
+              required
+            />
+          </FormControl>
+          <FormControl error={!!formErrorMessage.confirmPassword}>
+            <InputLabel>Password</InputLabel>
+            <Input
+              type="password"
+              name="password"
+              aria-label="password"
+              className={signupClasses.input}
+              inputProps={{ minLength: 6 }}
+              required
+            />
+            <FormHelperText>{formErrorMessage.confirmPassword}</FormHelperText>
+          </FormControl>
+          <FormControl error={!!formErrorMessage.confirmPassword}>
+            <InputLabel>Confirm Password</InputLabel>
+            <Input
+              type="password"
+              name="confirmPassword"
+              aria-label="confirm password"
+              inputProps={{ minLength: 6 }}
+              className={signupClasses.input}
+              required
+            />
+            <FormHelperText>{formErrorMessage.confirmPassword}</FormHelperText>
+          </FormControl>
+          <div className={signupClasses.buttonSpace}>
+            <BlueButton text="Create" />
+          </div>
         </form>
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };
 

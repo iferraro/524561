@@ -5,6 +5,7 @@ const useStyles = makeStyles(() => ({
   root: {
     width: 170,
     height: 54,
+    margin: "0 42px 0px 30px",
     color: "#3A8DFF",
     background: "#FFFFFF",
     boxShadow: "0px 2px 12px rgba(74, 106, 149, 0.2)",

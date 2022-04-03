@@ -1,29 +1,27 @@
 import React from "react";
-import { makeStyles, Grid, Box, Typography } from "@material-ui/core";
+import { makeStyles, div, Box, Typography } from "@material-ui/core";
 import BGImg from "../../bg-img.png";
 import Bubble from "../../bubble.svg";
 
 const useStyles = makeStyles(() => ({
   root: {
     position: "relative",
+    width: "calc((100vh * 425)/700)",
+    height: "100vh",
   },
   friendsImage: {
-    // position: "absolute",
-    height: "100vh",
+    position: "absolute",
+    height: "inherit",
   },
   gradientLayer: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100vh",
+    width: "inherit",
+    height: "inherit",
     background: "linear-gradient(180deg, #3A8DFF 0%, #86B9FF 100%)",
     mixBlendMode: "normal",
     opacity: 0.85,
     zIndex: 20,
-    overflow: "hidden",
   },
-  iconUnit: {
+  textUnit: {
     position: "absolute",
     top: "42%",
     left: "50%",
@@ -55,10 +53,10 @@ const useStyles = makeStyles(() => ({
 const ThreeFriends = () => {
   const classes = useStyles();
   return (
-    <Grid item className={classes.root}>
+    <div item className={classes.root}>
       <img src={BGImg} alt="Background" className={classes.friendsImage} />
-      <Box component="div" className={classes.gradientLayer}></Box>
-      <Box component="div" className={classes.iconUnit}>
+      <div className={classes.gradientLayer} />
+      <div className={classes.textUnit}>
         <img
           src={Bubble}
           alt="Speech Bubble"
@@ -68,8 +66,8 @@ const ThreeFriends = () => {
           Converse with anyone <br />
           with any language
         </Typography>
-      </Box>
-    </Grid>
+      </div>
+    </div>
   );
 };
 
