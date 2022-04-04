@@ -1,17 +1,35 @@
 import React from "react";
-import { makeStyles, div, Box, Typography } from "@material-ui/core";
+import {
+  makeStyles,
+  useMediaQuery,
+  useTheme,
+  Box,
+  Typography,
+} from "@material-ui/core";
+import { theme } from "../../themes/theme";
 import BGImg from "../../bg-img.png";
 import Bubble from "../../bubble.svg";
 
 const useStyles = makeStyles(() => ({
   root: {
     position: "relative",
-    width: "calc((100vh * 425)/700)",
+    width: "calc((425 * 100vh)/700)",
     height: "100vh",
+  },
+  rootSmall: {
+    position: "relative",
+    width: "100%",
+    height: "calc((700 * 100vw)/425)",
   },
   friendsImage: {
     position: "absolute",
+    width: "inherit",
     height: "inherit",
+  },
+  friendsImageSmall: {
+    position: "absolute",
+    height: "inherit",
+    width: "100%",
   },
   gradientLayer: {
     width: "inherit",
@@ -35,8 +53,8 @@ const useStyles = makeStyles(() => ({
     left: "50%",
     top: 0,
     transform: "translate(-50%, 0)",
-    height: 67,
     width: 67,
+    height: 67,
   },
   slogan: {
     position: "absolute",
@@ -52,9 +70,16 @@ const useStyles = makeStyles(() => ({
 
 const ThreeFriends = () => {
   const classes = useStyles();
+  const smallScreen = useMediaQuery("(max-width:1200px)");
   return (
-    <div item className={classes.root}>
-      <img src={BGImg} alt="Background" className={classes.friendsImage} />
+    <div className={smallScreen ? classes.rootSmall : classes.root}>
+      <img
+        src={BGImg}
+        alt="Background"
+        className={
+          smallScreen ? classes.friendsImageSmall : classes.friendsImage
+        }
+      />
       <div className={classes.gradientLayer} />
       <div className={classes.textUnit}>
         <img

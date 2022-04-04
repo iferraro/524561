@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {
-  // div,
-  Box,
   Typography,
   FormControl,
   InputLabel,
   Input,
-  TextField,
   FormHelperText,
   makeStyles,
+  useMediaQuery,
 } from "@material-ui/core";
 import { sharedClasses } from "./themes/signuplogin";
 import ThreeFriends from "./components/SignUpLogIn/ThreeFriends";
@@ -41,26 +39,34 @@ const Signup = ({ user, register }) => {
     if (user && user.id) history.push("/home");
   }, [user, history]);
 
-  const useStyles = makeStyles(() => {
-    return sharedClasses;
-  });
+  const useStyles = makeStyles(sharedClasses);
 
   const signupClasses = useStyles();
 
+  const smallScreen = useMediaQuery("(max-width:1200px)");
+
   return (
-    <div className={signupClasses.root}>
+    <div className={smallScreen ? signupClasses.rootSmall : signupClasses.root}>
       <ThreeFriends />
-      <div className={signupClasses.formSide}>
-        <div className={signupClasses.topLinePrompt}>
+      <div
+        className={
+          smallScreen ? signupClasses.formSideSmall : signupClasses.formSide
+        }
+      >
+        <div
+          className={
+            smallScreen
+              ? signupClasses.topLinePromptSmall
+              : signupClasses.topLinePrompt
+          }
+        >
           <Typography>Already have an account?</Typography>
-          <Link href="/login" to="/login" underline="none">
+          <Link href="/login" to="/login" style={{ textDecoration: "none" }}>
             <WhiteButton text="Login" />
           </Link>
         </div>
         <form onSubmit={handleRegister} className={signupClasses.forms}>
-          <heading className={signupClasses.heading}>
-            Create an account.
-          </heading>
+          <h1 className={signupClasses.heading}>Create an account.</h1>
           <FormControl>
             <InputLabel>Username</InputLabel>
             <Input
