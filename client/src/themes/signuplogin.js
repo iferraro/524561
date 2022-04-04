@@ -39,11 +39,29 @@ export const sharedClasses = {
     fontSize: 26,
     fontWeight: 600,
   },
-  forms: {
+  formsSignup: {
     display: "flex",
     flexDirection: "column",
     width: 380,
     marginTop: 36,
+  },
+  formsSignupSmall: {
+    display: "flex",
+    flexDirection: "column",
+    width: 350,
+    marginTop: 36,
+  },
+  formsLogin: {
+    display: "flex",
+    flexDirection: "column",
+    width: 380,
+    marginTop: 86,
+  },
+  formsLoginSmall: {
+    display: "flex",
+    flexDirection: "column",
+    width: 350,
+    marginTop: 86,
   },
   input: {
     height: 66,

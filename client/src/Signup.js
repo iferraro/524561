@@ -11,8 +11,8 @@ import {
 } from "@material-ui/core";
 import { sharedClasses } from "./themes/signuplogin";
 import ThreeFriends from "./components/SignUpLogIn/ThreeFriends";
-import BlueButton from "./components/SignUpLogIn/BlueButton";
 import WhiteButton from "./components/SignUpLogIn/WhiteButton";
+import BlueButton from "./components/SignUpLogIn/BlueButton";
 
 const Signup = ({ user, register }) => {
   const history = useHistory();
@@ -65,7 +65,14 @@ const Signup = ({ user, register }) => {
             <WhiteButton text="Login" />
           </Link>
         </div>
-        <form onSubmit={handleRegister} className={signupClasses.forms}>
+        <form
+          onSubmit={handleRegister}
+          className={
+            smallScreen
+              ? signupClasses.formsSignupSmall
+              : signupClasses.formsSignup
+          }
+        >
           <h1 className={signupClasses.heading}>Create an account.</h1>
           <FormControl>
             <InputLabel>Username</InputLabel>

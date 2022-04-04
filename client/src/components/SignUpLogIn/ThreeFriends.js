@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  makeStyles,
-  useMediaQuery,
-  useTheme,
-  Box,
-  Typography,
-} from "@material-ui/core";
-import { theme } from "../../themes/theme";
+import { makeStyles, useMediaQuery, Typography } from "@material-ui/core";
 import BGImg from "../../bg-img.png";
 import Bubble from "../../bubble.svg";
 
@@ -19,7 +12,7 @@ const useStyles = makeStyles(() => ({
   rootSmall: {
     position: "relative",
     width: "100%",
-    height: "calc((700 * 100vw)/425)",
+    height: "33vh",
   },
   friendsImage: {
     position: "absolute",
@@ -30,6 +23,8 @@ const useStyles = makeStyles(() => ({
     position: "absolute",
     height: "inherit",
     width: "100%",
+    objectFit: "cover",
+    objectPosition: "0 5%",
   },
   gradientLayer: {
     width: "inherit",
@@ -44,8 +39,8 @@ const useStyles = makeStyles(() => ({
     top: "42%",
     left: "50%",
     width: 269,
-    height: 187,
-    transform: "translate(-50%, -50%)",
+    height: 186,
+    transform: "translate(-50%, -35%)",
     zIndex: 40,
   },
   speechBubble: {
