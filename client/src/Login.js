@@ -35,7 +35,7 @@ const Login = ({ user, login }) => {
 
   const loginClasses = useStyles();
 
-  const smallScreen = useMediaQuery("(max-width:1200px)");
+  const smallScreen = useMediaQuery("(max-width:1023px)");
 
   return (
     <div className={smallScreen ? loginClasses.rootSmall : loginClasses.root}>

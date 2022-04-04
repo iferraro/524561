@@ -44,7 +44,7 @@ const Signup = ({ user, register }) => {
 
   const signupClasses = useStyles();
 
-  const smallScreen = useMediaQuery("(max-width:1200px)");
+  const smallScreen = useMediaQuery("(max-width:1023px)");
 
   return (
     <div className={smallScreen ? signupClasses.rootSmall : signupClasses.root}>

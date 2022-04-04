@@ -65,7 +65,7 @@ const useStyles = makeStyles(() => ({
 
 const ThreeFriends = () => {
   const classes = useStyles();
-  const smallScreen = useMediaQuery("(max-width:1200px)");
+  const smallScreen = useMediaQuery("(max-width:1023px)");
   return (
     <div className={smallScreen ? classes.rootSmall : classes.root}>
       <img

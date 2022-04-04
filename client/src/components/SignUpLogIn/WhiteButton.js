@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const WhiteButton = ({ text }) => {
-  const smallScreen = useMediaQuery("(max-width:1200px)");
+  const smallScreen = useMediaQuery("(max-width:1023px)");
   const classes = useStyles();
   return (
     <Button className={smallScreen ? classes.rootSmall : classes.root}>
