@@ -28,11 +28,11 @@ export const sharedClasses = {
   },
   topLinePromptSmall: {
     display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
     width: "inherit",
     color: "#B0B0B0",
-    flexDirection: "column",
-    justifyContent: "center",
   },
   heading: {
     marginBottom: 12,
