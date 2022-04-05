@@ -9,7 +9,7 @@ import {
   makeStyles,
   useMediaQuery,
 } from "@material-ui/core";
-import { sharedClasses } from "./themes/signuplogin";
+import { sharedClasses } from "./themes/signupLogin";
 import ThreeFriends from "./components/SignUpLogIn/ThreeFriends";
 import WhiteButton from "./components/SignUpLogIn/WhiteButton";
 import BlueButton from "./components/SignUpLogIn/BlueButton";
