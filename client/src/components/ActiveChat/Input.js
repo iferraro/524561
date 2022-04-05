@@ -26,21 +26,16 @@ const useStyles = makeStyles(() => ({
 const Input = ({ otherUser, conversationId, user, postMessage }) => {
   const classes = useStyles();
   const [text, setText] = useState("");
-  const [stagedFileList, setStagedFileList] = useState({});
-  const [imageURLs, setImageURLs] = useState([]);
 
   const handleChange = (event) => {
     setText(event.target.value);
   };
 
-  const handleStagingChange = (event) => {
-    setStagedFileList(event.target.files);
-  };
-
-  const uploadImages = async () => {
+  const getURLs = async (fileList) => {
     const formData = new FormData();
-    for (let i = 0; i < stagedFileList.length; i++) {
-      let imageFile = stagedFileList[i];
+    let tempURLs = [];
+    for (let i = 0; i < fileList.length; i++) {
+      let imageFile = fileList[i];
       formData.append("file", imageFile);
       formData.append("upload_preset", "h5mhaodh");
       const response = await fetch(cloudinaryURI, {
@@ -48,28 +43,26 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
         body: formData,
       });
       const data = await response.json();
-      setImageURLs([...imageURLs, data.secure_url]);
-      console.log(data, "<= data after upload");
-      console.log(imageURLs, "<= imageURLs at this stage");
+      tempURLs.push(data.secure_url);
     }
+    return tempURLs;
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(stagedFileList, "<= stagedFileList");
+    const formElements = event.currentTarget.elements;
+    const stagedFileList = formElements["files[]"].files;
+    let imageURLs = [];
     if (stagedFileList.length) {
-      await uploadImages();
+      imageURLs = await getURLs(stagedFileList);
     }
-    // const form = event.currentTarget;
-    // const formElements = form.elements;
     // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
     const reqBody = {
-      // text: formElements.text.value,
-      text: text,
+      text: formElements.text.value,
       recipientId: otherUser.id,
       conversationId,
       sender: conversationId ? null : user,
-      attachments: imageURLs.length ? imageURLs : [],
+      attachments: imageURLs,
     };
     console.log(reqBody, "<= reqBody");
     await postMessage(reqBody);
@@ -95,19 +88,18 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
             <InputAdornment position="start">
               <input
                 type="file"
-                name="stagedFileList"
+                name="files[]"
                 accept="image/*"
                 id="icon-button-file"
                 multiple
                 hidden
-                onChange={handleStagingChange}
               />
               <label htmlFor="icon-button-file">
                 <IconButton aria-label="upload picture" component="span">
                   <AddAPhotoIcon style={{ color: "#BDBDBD" }} />
                 </IconButton>
               </label>
-              {stagedFileList.length && <span>{stagedFileList[0].length}</span>}
+              {/* {stagedFileList.length && <span>{stagedFileList[0].length}</span>} */}
             </InputAdornment>
           }
         />

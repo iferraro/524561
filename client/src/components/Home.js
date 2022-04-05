@@ -64,9 +64,7 @@ const Home = ({ user, logout }) => {
 
   const postMessage = async (body) => {
     try {
-      console.log(body, "<= body");
       const data = await saveMessage(body);
-      console.log(data, "<= data");
 
       if (!body.conversationId) {
         addNewConvo(body.recipientId, data.message);
