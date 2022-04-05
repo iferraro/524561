@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
-import { FormControl, FilledInput } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from "react";
+import {
+  FormControl,
+  FilledInput,
+  InputAdornment,
+  IconButton,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 
 const useStyles = makeStyles(() => ({
   root: {
-    justifySelf: 'flex-end',
+    justifySelf: "flex-end",
     marginTop: 15,
   },
   input: {
     height: 70,
-    backgroundColor: '#F4F6FA',
+    backgroundColor: "#F4F6FA",
     borderRadius: 8,
     marginBottom: 20,
   },
@@ -17,7 +23,7 @@ const useStyles = makeStyles(() => ({
 
 const Input = ({ otherUser, conversationId, user, postMessage }) => {
   const classes = useStyles();
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -35,19 +41,34 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
       sender: conversationId ? null : user,
     };
     await postMessage(reqBody);
-    setText('');
+    setText("");
   };
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
       <FormControl fullWidth hiddenLabel>
         <FilledInput
-          classes={{ root: classes.input }}
-          disableUnderline
-          placeholder="Type something..."
-          value={text}
           name="text"
+          value={text}
+          placeholder="Type something..."
+          startAdornment={
+            <InputAdornment position="start">
+              <input
+                accept="image/*"
+                id="icon-button-file"
+                type="file"
+                hidden
+              />
+              <label htmlFor="icon-button-file">
+                <IconButton aria-label="upload picture" component="span">
+                  <AddAPhotoIcon style={{ color: "#BDBDBD" }} />
+                </IconButton>
+              </label>
+            </InputAdornment>
+          }
+          classes={{ root: classes.input }}
           onChange={handleChange}
+          disableUnderline
         />
       </FormControl>
     </form>
