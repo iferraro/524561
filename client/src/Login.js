@@ -8,6 +8,7 @@ import {
   Input,
   makeStyles,
   useMediaQuery,
+  InputAdornment,
 } from "@material-ui/core";
 import { sharedClasses } from "./themes/signuplogin";
 import ThreeFriends from "./components/SignUpLogIn/ThreeFriends";
@@ -84,6 +85,16 @@ const Login = ({ user, login }) => {
               type="password"
               name="password"
               aria-label="password"
+              endAdornment={
+                <InputAdornment position="end">
+                  <a
+                    href="/"
+                    style={{ textDecoration: "none", color: "#3A8DFF" }}
+                  >
+                    Forgot?
+                  </a>
+                </InputAdornment>
+              }
               className={loginClasses.input}
               required
             />
