@@ -15,7 +15,7 @@ const ChatImages = ({ attachments }) => {
             objectPosition: "0% 0%",
             borderRadius: "10px 10px 0 10px",
           }
-        : { height: "100%", marginLeft: 5, borderRadius: 10},
+        : { height: "100%", marginLeft: 5, borderRadius: 10 },
   };
   return (
     <div style={styles.root}>
