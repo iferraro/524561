@@ -7,6 +7,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
+import ImageIcon from "@material-ui/icons/Image";
 
 const cloudinaryURI = `https://api.cloudinary.com/v1_1/doo5nzoy0/image/upload`;
 
@@ -26,9 +27,14 @@ const useStyles = makeStyles(() => ({
 const Input = ({ otherUser, conversationId, user, postMessage }) => {
   const classes = useStyles();
   const [text, setText] = useState("");
+  const [imageCount, setImageCount] = useState(0);
 
   const handleChange = (event) => {
     setText(event.target.value);
+  };
+
+  const handleImageChange = (event) => {
+    setImageCount(event.target.files.length);
   };
 
   const getURLs = async (fileList) => {
@@ -51,7 +57,7 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formElements = event.currentTarget.elements;
-    const stagedFileList = formElements["files[]"].files;
+    let stagedFileList = formElements["files[]"].files;
     let imageURLs = [];
     if (stagedFileList.length) {
       imageURLs = await getURLs(stagedFileList);
@@ -67,6 +73,7 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
     console.log(reqBody, "<= reqBody");
     await postMessage(reqBody);
     setText("");
+    setImageCount(0);
   };
 
   return (
@@ -93,13 +100,18 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
                 id="icon-button-file"
                 multiple
                 hidden
+                onChange={handleImageChange}
               />
               <label htmlFor="icon-button-file">
                 <IconButton aria-label="upload picture" component="span">
                   <AddAPhotoIcon style={{ color: "#BDBDBD" }} />
                 </IconButton>
               </label>
-              {/* {stagedFileList.length && <span>{stagedFileList[0].length}</span>} */}
+              {imageCount > 0 && (
+                <span style={{ fontWeight: 600, color: "#3A8DFF" }}>
+                  <ImageIcon /> &times; {imageCount}
+                </span>
+              )}
             </InputAdornment>
           }
         />
