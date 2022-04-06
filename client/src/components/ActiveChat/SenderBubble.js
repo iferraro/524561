@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => ({
   profilePic: {
     width: 20,
     height: 20,
-    margin: "10px 0 20px 0",
+    margin: "10px 10px 20px 0",
   },
 }));
 

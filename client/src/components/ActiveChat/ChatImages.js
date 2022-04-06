@@ -9,10 +9,13 @@ const ChatImages = ({ attachments }) => {
     image:
       attachments.length === 1
         ? {
-            height: "100%",
+            height: 100,
+            width: 100,
+            objectFit: "cover",
+            objectPosition: "0% 0%",
             borderRadius: "10px 10px 0 10px",
           }
-        : { height: "100%", marginLeft: 5 },
+        : { height: "100%", marginLeft: 5, borderRadius: 10},
   };
   return (
     <div style={styles.root}>
