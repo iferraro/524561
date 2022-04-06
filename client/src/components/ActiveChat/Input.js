@@ -73,6 +73,7 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
     console.log(reqBody, "<= reqBody");
     await postMessage(reqBody);
     setText("");
+    formElements["files[]"].value = null;
     setImageCount(0);
   };
 
