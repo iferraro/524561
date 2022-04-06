@@ -24,6 +24,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: "0 10px 10px 10px",
   },
   text: {
+    textAlign: "center",
     fontSize: 14,
     fontWeight: "bold",
     color: "#FFFFFF",
@@ -46,9 +47,12 @@ const OtherUserBubble = ({ time, text, attachments, otherUser }) => {
         <Typography className={classes.usernameDate}>
           {otherUser.username} {time}
         </Typography>
-        <ChatImages attachments={attachments} />
+        {attachments.length !== 1 && <ChatImages attachments={attachments} />}
         <Box className={classes.bubble}>
-          <Typography className={classes.text}>{text}</Typography>
+          {attachments.length === 1 && <ChatImages attachments={attachments} />}
+          {text.length > 0 && (
+            <Typography className={classes.text}>{text}</Typography>
+          )}
         </Box>
       </Box>
     </Box>
