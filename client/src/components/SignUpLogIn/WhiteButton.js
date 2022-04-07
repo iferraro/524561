@@ -1,5 +1,5 @@
 import React from "react";
-import { useMediaQuery, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
@@ -25,8 +25,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const WhiteButton = ({ text }) => {
-  const smallScreen = useMediaQuery("(max-width:1023px)");
+const WhiteButton = ({ text, smallScreen }) => {
   const classes = useStyles();
   return (
     <Button className={smallScreen ? classes.rootSmall : classes.root}>

@@ -1,5 +1,5 @@
 import React from "react";
-import { useMediaQuery, Container, Box, Typography } from "@material-ui/core";
+import { Container, Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import BGImg from "../../bg-img.png";
 import Bubble from "../../bubble.svg";
@@ -66,9 +66,8 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ThreeFriends = () => {
+const ThreeFriends = ({ smallScreen }) => {
   const classes = useStyles();
-  const smallScreen = useMediaQuery("(max-width:1023px)");
   return (
     <Container className={smallScreen ? classes.rootSmall : classes.root}>
       <img

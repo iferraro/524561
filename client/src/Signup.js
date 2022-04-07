@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import {
-  Box,
-  Typography,
-  FormControl,
-  InputLabel,
-  Input,
-  FormHelperText,
-  useMediaQuery,
-} from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { Box, Container, Typography, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { sharedClasses } from "./themes/shared";
-import ThreeFriends from "./components/SignUpLogIn/ThreeFriends";
-import AuthInput from "./components/SignUpLogIn/AuthInput";
-import WhiteButton from "./components/SignUpLogIn/WhiteButton";
-import BlueButton from "./components/SignUpLogIn/BlueButton";
+import {
+  ThreeFriends,
+  TopLinePrompt,
+  AuthInput,
+  BlueButton,
+} from "./components/SignUpLogIn/index";
 
 const Signup = ({ user, register }) => {
   const history = useHistory();
@@ -49,25 +43,19 @@ const Signup = ({ user, register }) => {
   const smallScreen = useMediaQuery("(max-width:1023px)");
 
   return (
-    <div className={smallScreen ? signupClasses.rootSmall : signupClasses.root}>
-      <ThreeFriends />
-      <div
+    <Box className={smallScreen ? signupClasses.rootSmall : signupClasses.root}>
+      <ThreeFriends smallScreen={smallScreen} />
+      <Container
         className={
           smallScreen ? signupClasses.formSideSmall : signupClasses.formSide
         }
       >
-        <div
-          className={
-            smallScreen
-              ? signupClasses.topLinePromptSmall
-              : signupClasses.topLinePrompt
-          }
-        >
-          <Typography>Already have an account?</Typography>
-          <Link href="/login" to="/login" style={{ textDecoration: "none" }}>
-            <WhiteButton text="Login" />
-          </Link>
-        </div>
+        <TopLinePrompt
+          question="Already have an account?"
+          href="/login"
+          buttonText="Login"
+          smallScreen={smallScreen}
+        />
         <form
           onSubmit={handleRegister}
           className={
@@ -112,8 +100,8 @@ const Signup = ({ user, register }) => {
             <BlueButton text="Create" />
           </Box>
         </form>
-      </div>
-    </div>
+      </Container>
+    </Box>
   );
 };
 

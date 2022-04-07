@@ -18,22 +18,6 @@ export const sharedClasses = {
       width: "100%",
       padding: "30px 0",
     },
-    topLinePrompt: {
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "flex-end",
-      alignItems: "center",
-      width: "inherit",
-      color: "#B0B0B0",
-    },
-    topLinePromptSmall: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-      width: "inherit",
-      color: "#B0B0B0",
-    },
     heading: {
       marginBottom: 12,
       fontSize: 26,
@@ -74,5 +58,6 @@ export const sharedClasses = {
       justifyContent: "center",
       width: "inherit",
     },
+    forgotLinkColor: "#3A8DFF",
   };
   
