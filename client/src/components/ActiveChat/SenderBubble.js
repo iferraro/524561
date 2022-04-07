@@ -40,7 +40,9 @@ const SenderBubble = ({ time, text, attachments, otherUser }) => {
   return (
     <Box className={classes.root}>
       <Typography className={classes.date}>{time}</Typography>
-      {attachments.length !== 1 && <ChatImages attachments={attachments} />}
+      {attachments.length !== 1 && attachments.length > 0 && (
+        <ChatImages attachments={attachments} />
+      )}
       <Box className={classes.bubble}>
         {attachments.length === 1 && <ChatImages attachments={attachments} />}
         {text.length > 0 && (

@@ -47,7 +47,9 @@ const OtherUserBubble = ({ time, text, attachments, otherUser }) => {
         <Typography className={classes.usernameDate}>
           {otherUser.username} {time}
         </Typography>
-        {attachments.length !== 1 && <ChatImages attachments={attachments} />}
+        {attachments.length !== 1 && attachments.length > 0 && (
+          <ChatImages attachments={attachments} />
+        )}
         <Box className={classes.bubble}>
           {attachments.length === 1 && <ChatImages attachments={attachments} />}
           {text.length > 0 && (
