@@ -1,13 +1,19 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   FormControl,
   FilledInput,
+  InputLabel,
+  InputBase,
+  Button,
   InputAdornment,
   IconButton,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
-import ImageIcon from "@material-ui/icons/Image";
+import ContentCopy from "../../content_copy_gray_24dp.svg";
+import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
+// import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
+// import ImageIcon from "@material-ui/icons/Image";
 
 const cloudinaryURI = `https://api.cloudinary.com/v1_1/doo5nzoy0/image/upload`;
 
@@ -18,9 +24,12 @@ const useStyles = makeStyles(() => ({
   },
   input: {
     height: 70,
-    backgroundColor: "#F4F6FA",
+    backgroundColor: "#F0F5F9",
     borderRadius: 8,
     marginBottom: 20,
+  },
+  sentimentIcon: {
+    color: "#BFC9DB",
   },
 }));
 
@@ -44,12 +53,10 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
       let imageFile = fileList[i];
       formData.append("file", imageFile);
       formData.append("upload_preset", "h5mhaodh");
-      const response = await fetch(cloudinaryURI, {
-        method: "POST",
-        body: formData,
-      });
-      const data = await response.json();
-      tempURLs.push(data.secure_url);
+      const response = await axios.post(cloudinaryURI, formData);
+      console.log(response, "<= response");
+      // const data = await response.json();
+      // tempURLs.push(data.secure_url);
     }
     return tempURLs;
   };
@@ -89,11 +96,16 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
           name="text"
           value={text}
           placeholder="Type something..."
-          classes={{ root: classes.input }}
+          className={classes.input}
           onChange={handleChange}
           disableUnderline
-          startAdornment={
+          endAdornment={
             <InputAdornment position="start">
+              <IconButton>
+                <SentimentSatisfiedOutlinedIcon
+                  className={classes.sentimentIcon}
+                />
+              </IconButton>
               <input
                 type="file"
                 name="files[]"
@@ -103,16 +115,11 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
                 hidden
                 onChange={handleImageChange}
               />
-              <label htmlFor="icon-button-file">
+              <InputLabel htmlFor="icon-button-file">
                 <IconButton aria-label="upload picture" component="span">
-                  <AddAPhotoIcon style={{ color: "#BDBDBD" }} />
+                  <img src={ContentCopy} alt="upload picture" />
                 </IconButton>
-              </label>
-              {imageCount > 0 && (
-                <span style={{ fontWeight: 600, color: "#3A8DFF" }}>
-                  <ImageIcon /> &times; {imageCount}
-                </span>
-              )}
+              </InputLabel>
             </InputAdornment>
           }
         />
