@@ -5,10 +5,11 @@ import {
   FormControl,
   InputLabel,
   Input,
-  makeStyles,
   useMediaQuery,
   InputAdornment,
 } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
 import { sharedClasses } from "./themes/shared";
 import ThreeFriends from "./components/SignUpLogIn/ThreeFriends";
 import WhiteButton from "./components/SignUpLogIn/WhiteButton";

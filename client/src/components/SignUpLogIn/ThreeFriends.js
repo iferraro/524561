@@ -1,5 +1,6 @@
 import React from "react";
-import { makeStyles, useMediaQuery, Typography } from "@material-ui/core";
+import { useMediaQuery, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import BGImg from "../../bg-img.png";
 import Bubble from "../../bubble.svg";
 
