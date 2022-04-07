@@ -1,5 +1,5 @@
 import React from "react";
-import { useMediaQuery, Typography } from "@material-ui/core";
+import { useMediaQuery, Container, Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import BGImg from "../../bg-img.png";
 import Bubble from "../../bubble.svg";
@@ -9,11 +9,13 @@ const useStyles = makeStyles(() => ({
     position: "relative",
     width: "calc((425 * 100vh)/700)",
     height: "100vh",
+    padding: 0,
   },
   rootSmall: {
     position: "relative",
     width: "100%",
     height: "33vh",
+    padding: 0,
   },
   friendsImage: {
     position: "absolute",
@@ -37,11 +39,11 @@ const useStyles = makeStyles(() => ({
   },
   textUnit: {
     position: "absolute",
-    top: "42%",
+    top: "50%",
     left: "50%",
     width: 269,
     height: 186,
-    transform: "translate(-50%, -35%)",
+    transform: "translate(-50%, -50%)",
     zIndex: 40,
   },
   speechBubble: {
@@ -68,7 +70,7 @@ const ThreeFriends = () => {
   const classes = useStyles();
   const smallScreen = useMediaQuery("(max-width:1023px)");
   return (
-    <div className={smallScreen ? classes.rootSmall : classes.root}>
+    <Container className={smallScreen ? classes.rootSmall : classes.root}>
       <img
         src={BGImg}
         alt="Background"
@@ -76,8 +78,8 @@ const ThreeFriends = () => {
           smallScreen ? classes.friendsImageSmall : classes.friendsImage
         }
       />
-      <div className={classes.gradientLayer} />
-      <div className={classes.textUnit}>
+      <Box className={classes.gradientLayer} />
+      <Box className={classes.textUnit}>
         <img
           src={Bubble}
           alt="Speech Bubble"
@@ -87,8 +89,8 @@ const ThreeFriends = () => {
           Converse with anyone <br />
           with any language
         </Typography>
-      </div>
-    </div>
+      </Box>
+    </Container>
   );
 };
 
