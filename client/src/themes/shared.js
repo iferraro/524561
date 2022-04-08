@@ -60,4 +60,3 @@ export const sharedClasses = {
     },
     forgotLinkColor: "#3A8DFF",
   };
-  
