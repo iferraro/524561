@@ -1,18 +1,26 @@
 import React, { useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
+  Box,
+  Container,
   Typography,
   FormControl,
   InputLabel,
   Input,
-  makeStyles,
+  Link,
+  useTheme,
   useMediaQuery,
   InputAdornment,
 } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
 import { sharedClasses } from "./themes/shared";
-import ThreeFriends from "./components/SignUpLogIn/ThreeFriends";
-import WhiteButton from "./components/SignUpLogIn/WhiteButton";
-import BlueButton from "./components/SignUpLogIn/BlueButton";
+import {
+  ThreeFriends,
+  TopLinePrompt,
+  AuthInput,
+  BlueButton,
+} from "./components/SignUpLogIn/index";
 
 const Login = ({ user, login }) => {
   const history = useHistory();
@@ -38,46 +46,34 @@ const Login = ({ user, login }) => {
   const smallScreen = useMediaQuery("(max-width:1023px)");
 
   return (
-    <div className={smallScreen ? loginClasses.rootSmall : loginClasses.root}>
-      <ThreeFriends />
-      <div
+    <Box className={smallScreen ? loginClasses.rootSmall : loginClasses.root}>
+      <ThreeFriends smallScreen={smallScreen} />
+      <Container
         className={
           smallScreen ? loginClasses.formSideSmall : loginClasses.formSide
         }
       >
-        <div
-          className={
-            smallScreen
-              ? loginClasses.topLinePromptSmall
-              : loginClasses.topLinePrompt
-          }
-        >
-          <Typography>Don't have an account?</Typography>
-          <Link
-            href="/register"
-            to="/register"
-            style={{ textDecoration: "none" }}
-          >
-            <WhiteButton text="Create account" />
-          </Link>
-        </div>
+        <TopLinePrompt
+          question="Don't have an account?"
+          href="/register"
+          buttonText="Create account"
+          smallScreen={smallScreen}
+        />
         <form
           onSubmit={handleLogin}
           className={
             smallScreen ? loginClasses.formsLoginSmall : loginClasses.formsLogin
           }
         >
-          <h1 className={loginClasses.heading}>Welcome Back!</h1>
-          <FormControl>
-            <InputLabel>Username</InputLabel>
-            <Input
-              type="text"
-              name="username"
-              aria-label="username"
-              className={loginClasses.input}
-              required
-            />
-          </FormControl>
+          <Typography className={loginClasses.heading}>
+            Welcome Back!
+          </Typography>
+          <AuthInput
+            label="Username"
+            type="text"
+            name="username"
+            ariaLabel="username"
+          />
           <FormControl>
             <InputLabel>Password</InputLabel>
             <Input
@@ -86,24 +82,25 @@ const Login = ({ user, login }) => {
               aria-label="password"
               endAdornment={
                 <InputAdornment position="end">
-                  <a
+                  <Link
                     href="/"
-                    style={{ textDecoration: "none", color: "#3A8DFF" }}
+                    underline="none"
+                    color="primary"
                   >
                     Forgot?
-                  </a>
+                  </Link>
                 </InputAdornment>
               }
               className={loginClasses.input}
               required
             />
           </FormControl>
-          <div className={loginClasses.buttonSpace}>
+          <Box className={loginClasses.buttonSpace}>
             <BlueButton text="Login" />
-          </div>
+          </Box>
         </form>
-      </div>
-    </div>
+      </Container>
+    </Box>
   );
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { makeStyles, useMediaQuery, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -10,6 +11,7 @@ const useStyles = makeStyles(() => ({
     background: "#FFFFFF",
     boxShadow: "0px 2px 12px rgba(74, 106, 149, 0.2)",
     borderRadius: 5,
+    textDecoration: "none",
   },
   rootSmall: {
     width: 170,
@@ -19,11 +21,11 @@ const useStyles = makeStyles(() => ({
     boxShadow: "0px 2px 12px rgba(74, 106, 149, 0.2)",
     borderRadius: 5,
     marginLeft: 0,
+    textDecoration: "none",
   },
 }));
 
-const WhiteButton = ({ text }) => {
-  const smallScreen = useMediaQuery("(max-width:1023px)");
+const WhiteButton = ({ text, smallScreen }) => {
   const classes = useStyles();
   return (
     <Button className={smallScreen ? classes.rootSmall : classes.root}>

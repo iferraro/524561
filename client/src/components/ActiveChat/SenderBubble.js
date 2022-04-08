@@ -1,7 +1,12 @@
 import React from "react";
+<<<<<<< issuethree
 import { Box, Typography, Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import MessageContent from "./MessageContent";
+=======
+import { Box, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+>>>>>>> issuetwo
 
 const useStyles = makeStyles(() => ({
   root: {

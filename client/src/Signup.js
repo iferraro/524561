@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import {
-  Typography,
-  FormControl,
-  InputLabel,
-  Input,
-  FormHelperText,
-  makeStyles,
-  useMediaQuery,
-} from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { Box, Container, Typography, useMediaQuery } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
 import { sharedClasses } from "./themes/shared";
-import ThreeFriends from "./components/SignUpLogIn/ThreeFriends";
-import WhiteButton from "./components/SignUpLogIn/WhiteButton";
-import BlueButton from "./components/SignUpLogIn/BlueButton";
+import {
+  ThreeFriends,
+  TopLinePrompt,
+  AuthInput,
+  BlueButton,
+} from "./components/SignUpLogIn/index";
 
 const Signup = ({ user, register }) => {
   const history = useHistory();
@@ -46,25 +43,19 @@ const Signup = ({ user, register }) => {
   const smallScreen = useMediaQuery("(max-width:1023px)");
 
   return (
-    <div className={smallScreen ? signupClasses.rootSmall : signupClasses.root}>
-      <ThreeFriends />
-      <div
+    <Box className={smallScreen ? signupClasses.rootSmall : signupClasses.root}>
+      <ThreeFriends smallScreen={smallScreen} />
+      <Container
         className={
           smallScreen ? signupClasses.formSideSmall : signupClasses.formSide
         }
       >
-        <div
-          className={
-            smallScreen
-              ? signupClasses.topLinePromptSmall
-              : signupClasses.topLinePrompt
-          }
-        >
-          <Typography>Already have an account?</Typography>
-          <Link href="/login" to="/login" style={{ textDecoration: "none" }}>
-            <WhiteButton text="Login" />
-          </Link>
-        </div>
+        <TopLinePrompt
+          question="Already have an account?"
+          href="/login"
+          buttonText="Login"
+          smallScreen={smallScreen}
+        />
         <form
           onSubmit={handleRegister}
           className={
@@ -73,57 +64,44 @@ const Signup = ({ user, register }) => {
               : signupClasses.formsSignup
           }
         >
-          <h1 className={signupClasses.heading}>Create an account.</h1>
-          <FormControl>
-            <InputLabel>Username</InputLabel>
-            <Input
-              type="text"
-              name="username"
-              aria-label="username"
-              className={signupClasses.input}
-              required
-            />
-          </FormControl>
-          <FormControl>
-            <InputLabel>E-mail address</InputLabel>
-            <Input
-              type="email"
-              name="email"
-              aria-label="e-mail address"
-              className={signupClasses.input}
-              required
-            />
-          </FormControl>
-          <FormControl error={!!formErrorMessage.confirmPassword}>
-            <InputLabel>Password</InputLabel>
-            <Input
-              type="password"
-              name="password"
-              aria-label="password"
-              className={signupClasses.input}
-              inputProps={{ minLength: 6 }}
-              required
-            />
-            <FormHelperText>{formErrorMessage.confirmPassword}</FormHelperText>
-          </FormControl>
-          <FormControl error={!!formErrorMessage.confirmPassword}>
-            <InputLabel>Confirm Password</InputLabel>
-            <Input
-              type="password"
-              name="confirmPassword"
-              aria-label="confirm password"
-              inputProps={{ minLength: 6 }}
-              className={signupClasses.input}
-              required
-            />
-            <FormHelperText>{formErrorMessage.confirmPassword}</FormHelperText>
-          </FormControl>
-          <div className={signupClasses.buttonSpace}>
+          <Typography className={signupClasses.heading}>
+            Create an account.
+          </Typography>
+          <AuthInput
+            label="Username"
+            type="text"
+            name="username"
+            ariaLabel="username"
+          />
+          <AuthInput
+            label="E-mail Address"
+            type="email"
+            name="email"
+            ariaLabel="e-mail address"
+          />
+          <AuthInput
+            error={!!formErrorMessage.confirmPassword}
+            label="Password"
+            type="password"
+            name="password"
+            ariaLabel="password"
+            inputProps={{ minLength: 6 }}
+          />
+          <AuthInput
+            error={!!formErrorMessage.confirmPassword}
+            label="Confirm Password"
+            type="password"
+            name="confirmPassword"
+            ariaLabel="confirm password"
+            inputProps={{ minLength: 6 }}
+            formErrorMessage={formErrorMessage.confirmPassword}
+          />
+          <Box className={signupClasses.buttonSpace}>
             <BlueButton text="Create" />
-          </div>
+          </Box>
         </form>
-      </div>
-    </div>
+      </Container>
+    </Box>
   );
 };
 
