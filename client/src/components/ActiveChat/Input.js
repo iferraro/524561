@@ -47,29 +47,32 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
   };
 
   const getURLs = async (fileList) => {
+    const instance = axios.create();
     const formData = new FormData();
     let tempURLs = [];
     for (let i = 0; i < fileList.length; i++) {
-      let imageFile = fileList[i];
+      const imageFile = fileList[i];
       formData.append("file", imageFile);
       formData.append("upload_preset", "h5mhaodh");
-      const response = await axios.post(cloudinaryURI, formData);
-      console.log(response, "<= response");
-      // const data = await response.json();
-      // tempURLs.push(data.secure_url);
+      try {
+        const response = await instance.post(cloudinaryURI, formData);
+        tempURLs[i] = response.data.secure_url;
+      } catch (error) {
+        console.error(error);
+      }
     }
-    return tempURLs;
+    return Promise.all(tempURLs);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formElements = event.currentTarget.elements;
-    let stagedFileList = formElements["files[]"].files;
+    const stagedFileList = formElements["files[]"].files;
     let imageURLs = [];
     if (stagedFileList.length) {
       imageURLs = await getURLs(stagedFileList);
     }
-    // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
+        // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
     const reqBody = {
       text: formElements.text.value,
       recipientId: otherUser.id,
@@ -117,7 +120,7 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
               />
               <InputLabel htmlFor="icon-button-file">
                 <IconButton aria-label="upload picture" component="span">
-                  <img src={ContentCopy} alt="upload picture" />
+                  <img src={ContentCopy} alt="upload" />
                 </IconButton>
               </InputLabel>
             </InputAdornment>
