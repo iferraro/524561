@@ -9,7 +9,7 @@ export const sharedClasses = {
       flexDirection: "column",
       alignItems: "center",
       width: "100%",
-      padding: "30px 42px",
+      padding: "28px 42px 0 42px",
     },
     formSideSmall: {
       display: "flex",
@@ -18,22 +18,17 @@ export const sharedClasses = {
       width: "100%",
       padding: "30px 0",
     },
-    heading: {
-      marginBottom: 12,
-      fontSize: 26,
-      fontWeight: 600,
-    },
     formsSignup: {
       display: "flex",
       flexDirection: "column",
       width: 380,
-      marginTop: 36,
+      marginTop: 20,
     },
     formsSignupSmall: {
       display: "flex",
       flexDirection: "column",
       width: 350,
-      marginTop: 36,
+      marginTop: 20,
     },
     formsLogin: {
       display: "flex",
@@ -58,6 +53,5 @@ export const sharedClasses = {
       justifyContent: "center",
       width: "inherit",
     },
-    forgotLinkColor: "#3A8DFF",
   };
   

@@ -9,7 +9,6 @@ const useStyles = makeStyles(() => ({
     color: "#FFF",
     background: "#3A8DFF",
     borderRadius: 3,
-    zIndex: 30,
   },
 }));
 

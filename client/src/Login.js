@@ -3,12 +3,10 @@ import { useHistory } from "react-router-dom";
 import {
   Box,
   Container,
-  Typography,
   FormControl,
   InputLabel,
   Input,
   Link,
-  useTheme,
   useMediaQuery,
   InputAdornment,
 } from "@material-ui/core";
@@ -18,6 +16,7 @@ import { sharedClasses } from "./themes/shared";
 import {
   ThreeFriends,
   TopLinePrompt,
+  WelcomeText,
   AuthInput,
   BlueButton,
 } from "./components/SignUpLogIn/index";
@@ -65,9 +64,7 @@ const Login = ({ user, login }) => {
             smallScreen ? loginClasses.formsLoginSmall : loginClasses.formsLogin
           }
         >
-          <Typography className={loginClasses.heading}>
-            Welcome Back!
-          </Typography>
+          <WelcomeText text="Welcome Back!" />
           <AuthInput
             label="Username"
             type="text"
@@ -82,11 +79,7 @@ const Login = ({ user, login }) => {
               aria-label="password"
               endAdornment={
                 <InputAdornment position="end">
-                  <Link
-                    href="/"
-                    underline="none"
-                    color="primary"
-                  >
+                  <Link href="/" underline="none" color="primary">
                     Forgot?
                   </Link>
                 </InputAdornment>

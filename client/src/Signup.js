@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Box, Container, Typography, useMediaQuery } from "@material-ui/core";
+import { Box, Container, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { sharedClasses } from "./themes/shared";
 import {
   ThreeFriends,
   TopLinePrompt,
+  WelcomeText,
   AuthInput,
   BlueButton,
 } from "./components/SignUpLogIn/index";
@@ -64,9 +65,7 @@ const Signup = ({ user, register }) => {
               : signupClasses.formsSignup
           }
         >
-          <Typography className={signupClasses.heading}>
-            Create an account.
-          </Typography>
+          <WelcomeText text="Create an account." />
           <AuthInput
             label="Username"
             type="text"
