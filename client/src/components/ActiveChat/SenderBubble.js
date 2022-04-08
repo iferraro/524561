@@ -1,7 +1,7 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { Box, Typography, Avatar } from "@material-ui/core";
-import ChatImages from "./ChatImages";
+import { makeStyles } from "@material-ui/core/styles";
+import MessageContent from "./MessageContent";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -40,15 +40,12 @@ const SenderBubble = ({ time, text, attachments, otherUser }) => {
   return (
     <Box className={classes.root}>
       <Typography className={classes.date}>{time}</Typography>
-      {attachments.length !== 1 && attachments.length > 0 && (
-        <ChatImages attachments={attachments} />
-      )}
-      <Box className={classes.bubble}>
-        {attachments.length === 1 && <ChatImages attachments={attachments} />}
-        {text.length > 0 && (
-          <Typography className={classes.text}>{text}</Typography>
-        )}
-      </Box>
+      <MessageContent
+        text={text}
+        attachments={attachments}
+        bubbleClass={classes.bubble}
+        textClass={classes.text}
+      />
       {attachments.length > 0 && (
         <Avatar
           alt={otherUser.username}

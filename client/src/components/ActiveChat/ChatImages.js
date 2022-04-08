@@ -1,4 +1,5 @@
 import React from "react";
+import { Box } from "@material-ui/core";
 
 const ChatImages = ({ attachments }) => {
   const styles = {
@@ -18,11 +19,11 @@ const ChatImages = ({ attachments }) => {
         : { height: "100%", marginLeft: 5, borderRadius: 10 },
   };
   return (
-    <div style={styles.root}>
+    <Box style={styles.root}>
       {attachments.map((url) => {
         return <img key={url} src={url} alt={url} style={styles.image} />;
       })}
-    </div>
+    </Box>
   );
 };
 

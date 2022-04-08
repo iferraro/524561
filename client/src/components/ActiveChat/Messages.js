@@ -3,6 +3,10 @@ import { Box } from "@material-ui/core";
 import { SenderBubble, OtherUserBubble } from ".";
 import moment from "moment";
 
+const evaluate = (iterable) => {
+  return iterable === null || iterable === undefined ? [] : iterable;
+};
+
 const Messages = (props) => {
   const { messages, otherUser, userId } = props;
   return (
@@ -14,7 +18,7 @@ const Messages = (props) => {
           <SenderBubble
             key={message.id}
             text={message.text}
-            attachments={message.attachments}
+            attachments={evaluate(message.attachments)}
             time={time}
             otherUser={otherUser}
           />
@@ -22,7 +26,7 @@ const Messages = (props) => {
           <OtherUserBubble
             key={message.id}
             text={message.text}
-            attachments={message.attachments}
+            attachments={evaluate(message.attachments)}
             time={time}
             otherUser={otherUser}
           />

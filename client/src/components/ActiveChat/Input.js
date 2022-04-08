@@ -4,16 +4,12 @@ import {
   FormControl,
   FilledInput,
   InputLabel,
-  InputBase,
-  Button,
   InputAdornment,
   IconButton,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ContentCopy from "../../content_copy_gray_24dp.svg";
 import SentimentSatisfiedOutlinedIcon from "@material-ui/icons/SentimentSatisfiedOutlined";
-// import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
-// import ImageIcon from "@material-ui/icons/Image";
 
 const cloudinaryURI = `https://api.cloudinary.com/v1_1/doo5nzoy0/image/upload`;
 
@@ -24,9 +20,10 @@ const useStyles = makeStyles(() => ({
   },
   input: {
     height: 70,
-    backgroundColor: "#F0F5F9",
-    borderRadius: 8,
     marginBottom: 20,
+    borderRadius: 8,
+    fontWeight: 600,
+    backgroundColor: "#F0F5F9",
   },
   sentimentIcon: {
     color: "#BFC9DB",
@@ -36,14 +33,9 @@ const useStyles = makeStyles(() => ({
 const Input = ({ otherUser, conversationId, user, postMessage }) => {
   const classes = useStyles();
   const [text, setText] = useState("");
-  const [imageCount, setImageCount] = useState(0);
 
   const handleChange = (event) => {
     setText(event.target.value);
-  };
-
-  const handleImageChange = (event) => {
-    setImageCount(event.target.files.length);
   };
 
   const getURLs = async (fileList) => {
@@ -80,11 +72,9 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
       sender: conversationId ? null : user,
       attachments: imageURLs,
     };
-    console.log(reqBody, "<= reqBody");
     await postMessage(reqBody);
     setText("");
     formElements["files[]"].value = null;
-    setImageCount(0);
   };
 
   return (
@@ -116,7 +106,6 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
                 id="icon-button-file"
                 multiple
                 hidden
-                onChange={handleImageChange}
               />
               <InputLabel htmlFor="icon-button-file">
                 <IconButton aria-label="upload picture" component="span">
