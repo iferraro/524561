@@ -64,7 +64,6 @@ const Login = ({ user, login }) => {
             smallScreen ? loginClasses.formsLoginSmall : loginClasses.formsLogin
           }
         >
-          <WelcomeText text="Welcome Back!" />
           <AuthInput
             label="Username"
             type="text"
@@ -89,7 +88,6 @@ const Login = ({ user, login }) => {
             />
           </FormControl>
           <Box className={loginClasses.buttonSpace}>
-            <BlueButton text="Login" />
           </Box>
         </form>
       </Container>

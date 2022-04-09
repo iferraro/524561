@@ -9,6 +9,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: "flex-end",
     alignItems: "center",
     width: "inherit",
+    marginTop: 30,
     color: "#B0B0B0",
   },
   rootSmall: {
@@ -17,6 +18,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
     width: "inherit",
+    marginTop: 30,
     color: "#B0B0B0",
   },
   whiteButton: {

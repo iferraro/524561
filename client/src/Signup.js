@@ -9,7 +9,6 @@ import {
   TopLinePrompt,
   WelcomeText,
   AuthInput,
-  BlueButton,
 } from "./components/SignUpLogIn/index";
 
 const Signup = ({ user, register }) => {
@@ -65,7 +64,6 @@ const Signup = ({ user, register }) => {
               : signupClasses.formsSignup
           }
         >
-          <WelcomeText text="Create an account." />
           <AuthInput
             label="Username"
             type="text"
@@ -96,7 +94,6 @@ const Signup = ({ user, register }) => {
             formErrorMessage={formErrorMessage.confirmPassword}
           />
           <Box className={signupClasses.buttonSpace}>
-            <BlueButton text="Create" />
           </Box>
         </form>
       </Container>
