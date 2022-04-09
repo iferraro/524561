@@ -7,9 +7,11 @@ import Bubble from "../../bubble.svg";
 const useStyles = makeStyles(() => ({
   root: {
     position: "relative",
-    width: "calc((425 * 100vh)/700)",
-    height: "100vh",
+    width: "100%",
+    // width: "calc((425 * 100%)/700)",
+    height: "100%",
     padding: 0,
+    backgroundColor: "magenta"
   },
   rootSmall: {
     position: "relative",
