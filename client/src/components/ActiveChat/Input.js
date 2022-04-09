@@ -33,6 +33,7 @@ const useStyles = makeStyles(() => ({
 const Input = ({ otherUser, conversationId, user, postMessage }) => {
   const classes = useStyles();
   const [text, setText] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -58,13 +59,14 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const formElements = event.currentTarget.elements;
     const stagedFileList = formElements["files[]"].files;
     let imageURLs = [];
     if (stagedFileList.length) {
       imageURLs = await getURLs(stagedFileList);
     }
-        // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
+    // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
     const reqBody = {
       text: formElements.text.value,
       recipientId: otherUser.id,
@@ -75,6 +77,7 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
     await postMessage(reqBody);
     setText("");
     formElements["files[]"].value = null;
+    setLoading(false);
   };
 
   return (
@@ -84,7 +87,7 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
       className={classes.root}
       onSubmit={handleSubmit}
     >
-      <FormControl fullWidth hiddenLabel>
+      <FormControl fullWidth hiddenLabel disabled={loading}>
         <FilledInput
           name="text"
           value={text}
