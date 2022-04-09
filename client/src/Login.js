@@ -12,13 +12,10 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { sharedClasses } from "./themes/shared";
 import {
   ThreeFriends,
   TopLinePrompt,
-  WelcomeText,
   AuthInput,
-  BlueButton,
 } from "./components/SignUpLogIn/index";
 
 const Login = ({ user, login }) => {
@@ -38,7 +35,9 @@ const Login = ({ user, login }) => {
     if (user && user.id) history.push("/home");
   }, [user, history]);
 
-  const useStyles = makeStyles(sharedClasses);
+  const useStyles = makeStyles(() => ({
+    
+  }));
 
   const loginClasses = useStyles();
 

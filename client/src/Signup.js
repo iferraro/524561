@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Box, Container, useMediaQuery } from "@material-ui/core";
+import {
+  Box,
+  Container,
+  FormControl,
+  FormHelperText,
+  TextField,
+  useMediaQuery,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { sharedClasses } from "./themes/shared";
 import {
   ThreeFriends,
   TopLinePrompt,
-  WelcomeText,
-  AuthInput,
+  Form,
 } from "./components/SignUpLogIn/index";
 
 const Signup = ({ user, register }) => {
@@ -36,19 +41,47 @@ const Signup = ({ user, register }) => {
     if (user && user.id) history.push("/home");
   }, [user, history]);
 
-  const useStyles = makeStyles(sharedClasses);
+  const useStyles = makeStyles(() => ({
+    root: {
+      display: "flex",
+      flexDirection: "row",
+      height: "100%"
+    },
+    rootSmall: {
+      display: "flex",
+      flexDirection: "column",
+      height: "100%"
+    },
+    formSide: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      width: "100%",
+    },
+    formSideSmall: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      width: "100%",
+      padding: "30px 0",
+    },
+    textField: {
+      height: 66,
+      marginBottom: 40,
+      fontSize: 14,
+      fontWeight: 600,
+    },
+  }));
 
-  const signupClasses = useStyles();
+  const classes = useStyles();
 
   const smallScreen = useMediaQuery("(max-width:1023px)");
 
   return (
-    <Box className={smallScreen ? signupClasses.rootSmall : signupClasses.root}>
+    <Box className={smallScreen ? classes.rootSmall : classes.root}>
       <ThreeFriends smallScreen={smallScreen} />
       <Container
-        className={
-          smallScreen ? signupClasses.formSideSmall : signupClasses.formSide
-        }
+        className={smallScreen ? classes.formSideSmall : classes.formSide}
       >
         <TopLinePrompt
           question="Already have an account?"
@@ -56,46 +89,56 @@ const Signup = ({ user, register }) => {
           buttonText="Login"
           smallScreen={smallScreen}
         />
-        <form
+        <Form
+          welcomeText="Create an account."
+          buttonText="Create"
+          smallScreen={smallScreen}
           onSubmit={handleRegister}
-          className={
-            smallScreen
-              ? signupClasses.formsSignupSmall
-              : signupClasses.formsSignup
-          }
         >
-          <AuthInput
-            label="Username"
-            type="text"
-            name="username"
-            ariaLabel="username"
-          />
-          <AuthInput
-            label="E-mail Address"
-            type="email"
-            name="email"
-            ariaLabel="e-mail address"
-          />
-          <AuthInput
-            error={!!formErrorMessage.confirmPassword}
-            label="Password"
-            type="password"
-            name="password"
-            ariaLabel="password"
-            inputProps={{ minLength: 6 }}
-          />
-          <AuthInput
-            error={!!formErrorMessage.confirmPassword}
-            label="Confirm Password"
-            type="password"
-            name="confirmPassword"
-            ariaLabel="confirm password"
-            inputProps={{ minLength: 6 }}
-            formErrorMessage={formErrorMessage.confirmPassword}
-          />
-          <Box className={signupClasses.buttonSpace}>
-          </Box>
-        </form>
+          <FormControl>
+            <TextField
+              type="text"
+              name="username"
+              label="Username"
+              aria-label="username"
+              className={classes.textField}
+              required
+            />
+          </FormControl>
+          <FormControl>
+            <TextField
+              type="email"
+              name="email"
+              label="E-mail address"
+              aria-label="e-mail address"
+              className={classes.textField}
+              required
+            />
+          </FormControl>
+          <FormControl error={!!formErrorMessage.confirmPassword}>
+            <TextField
+              type="password"
+              name="password"
+              label="Password"
+              aria-label="password"
+              inputProps={{ minLength: 6 }}
+              className={classes.textField}
+              required
+            />
+            <FormHelperText>{formErrorMessage.confirmPassword}</FormHelperText>
+          </FormControl>
+          <FormControl error={!!formErrorMessage.confirmPassword}>
+            <TextField
+              type="password"
+              name="confirmPassword"
+              label="Confirm Password"
+              aria-label="confirm password"
+              inputProps={{ minLength: 6 }}
+              required
+            />
+            <FormHelperText>{formErrorMessage.confirmPassword}</FormHelperText>
+          </FormControl>
+        </Form>
       </Container>
     </Box>
   );

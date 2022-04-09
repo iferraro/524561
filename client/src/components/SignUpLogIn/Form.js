@@ -1,26 +1,22 @@
 import React from "react";
-import { Box, Typography, Button } from "@material-ui/core";
+import { Box, Container, Typography, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
     flexDirection: "column",
+    width: 380,
+    padding: 0
   },
-  rootSmall: { display: "flex", flexDirection: "column" },
-  formSide: {
+  welcomeText: {
+    fontSize: 26,
+    fontWeight: 600,
+    marginBottom: 12,
+  },
+  formElement: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    width: "100%",
-    padding: "30px 42px 0 42px",
-  },
-  formSideSmall: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "100%",
-    padding: "30px 0",
   },
   formsSignup: {
     display: "flex",
@@ -46,34 +42,40 @@ const useStyles = makeStyles(() => ({
     width: 350,
     marginTop: 86,
   },
-  input: {
-    height: 66,
-    marginBottom: 40,
-    fontSize: 14,
-    fontWeight: 600,
-  },
-  buttonSpace: {
-    display: "flex",
-    justifyContent: "center",
-    width: "inherit",
-  },
+  //   buttonSpace: {
+  //     display: "flex",
+  //     justifyContent: "center",
+  //     width: "inherit",
+  //   },
   blueButton: {
-    marginBottom: 10,
-    fontSize: 26,
-    fontWeight: 600,
+    width: 160,
+    height: 56,
+    borderRadius: 3,
+    fontSize: 16,
+    fontWeight: 700,
+    lineHeight: 24,
+    margin: "40px auto 0 auto",
+    color: "#FFF",
+    background: "#3A8DFF",
   },
 }));
 
-const Form = ({ smallScreen, welcomeText, buttonText, children }) => {
+const Form = ({ smallScreen, welcomeText, buttonText, onSubmit, children }) => {
   const classes = useStyles();
   return (
-    <Box className={smallScreen ? classes.rootSmall : classes.root}>
-      <Typography className={classes.root}>{welcomeText}</Typography>
-      {children}
-      <Button type="submit" variant="contained" className={classes.blueButton}>
-        {buttonText}
-      </Button>
-    </Box>
+    <Container className={classes.root}>
+      <Typography className={classes.welcomeText}>{welcomeText}</Typography>
+      <form onSubmit={onSubmit} className={classes.formElement}>
+        {children}
+        <Button
+          type="submit"
+          variant="contained"
+          className={classes.blueButton}
+        >
+          {buttonText}
+        </Button>
+      </form>
+    </Container>
   );
 };
 
