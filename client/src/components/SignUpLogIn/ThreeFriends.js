@@ -4,23 +4,42 @@ import { makeStyles } from "@material-ui/core/styles";
 import BGImg from "../../bg-img.png";
 import Bubble from "../../bubble.svg";
 
-// console.log(rootElHeight);
-// const rootElHeight = document.getElementById("root").scrollHeight;
-
-const ThreeFriends = ({ smallScreen }) => {
-  const [rootHeight, setRootHeight] = useState(0);
+const ThreeFriends = ({ signupHeight, smallScreen }) => {
+  const [pictureHeight, setPictureHeight] = useState(0);
 
   useEffect(() => {
-    setRootHeight(document.body.scrollHeight);
+    setPictureHeight(
+      Math.max(
+        signupHeight,
+        document.documentElement.getBoundingClientRect().height
+      )
+    );
   }, []);
+
+  const renderPictureHeight = () => {
+    setPictureHeight(
+      Math.max(
+        signupHeight,
+        document.documentElement.getBoundingClientRect().height // this must actually be height of formside
+      )
+    );
+    console.log(window.innerHeight);
+    console.log(document.documentElement.scrollHeight);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", renderPictureHeight);
+    return () => window.removeEventListener("resize", renderPictureHeight);
+  });
 
   const useStyles = makeStyles(() => ({
     root: {
       position: "relative",
-      width: (425 * rootHeight) / 700,
-      height: rootHeight,
+      width: (425 * pictureHeight) / 700,
+      // height: pictureHeight,
+      minHeight: signupHeight,
       padding: 0,
-      backgroundColor: "magenta",
+      // backgroundColor: "magenta",
     },
     rootSmall: {
       position: "relative",
@@ -45,7 +64,7 @@ const ThreeFriends = ({ smallScreen }) => {
       background: "linear-gradient(180deg, #3A8DFF 0%, #86B9FF 100%)",
       mixBlendMode: "normal",
       opacity: 0.85,
-      zIndex: 20,
+      zIndex: 40,
     },
     textUnit: {
       position: "absolute",

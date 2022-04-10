@@ -2,20 +2,19 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
   Box,
-  Container,
   FormControl,
-  InputLabel,
   Input,
+  InputLabel,
+  InputAdornment,
   Link,
   useMediaQuery,
-  InputAdornment,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import {
   ThreeFriends,
   TopLinePrompt,
-  AuthInput,
+  Form,
 } from "./components/SignUpLogIn/index";
 
 const Login = ({ user, login }) => {
@@ -35,40 +34,32 @@ const Login = ({ user, login }) => {
     if (user && user.id) history.push("/home");
   }, [user, history]);
 
-  const useStyles = makeStyles(() => ({
-    
-  }));
+  const useStyles = makeStyles(() => ({}));
 
-  const loginClasses = useStyles();
+  const classes = useStyles();
 
   const smallScreen = useMediaQuery("(max-width:1023px)");
 
   return (
-    <Box className={smallScreen ? loginClasses.rootSmall : loginClasses.root}>
+    <Box className={smallScreen ? classes.rootSmall : classes.root}>
       <ThreeFriends smallScreen={smallScreen} />
-      <Container
-        className={
-          smallScreen ? loginClasses.formSideSmall : loginClasses.formSide
-        }
-      >
+      <Box className={smallScreen ? classes.formSideSmall : classes.formSide}>
         <TopLinePrompt
           question="Don't have an account?"
           href="/register"
           buttonText="Create account"
           smallScreen={smallScreen}
         />
-        <form
+        <Form
+          welcomeText="Welcome Back!"
+          buttonText="Login"
+          smallScreen={smallScreen}
           onSubmit={handleLogin}
-          className={
-            smallScreen ? loginClasses.formsLoginSmall : loginClasses.formsLogin
-          }
         >
-          <AuthInput
-            label="Username"
-            type="text"
-            name="username"
-            ariaLabel="username"
-          />
+          <FormControl margin="normal" required>
+            <InputLabel>Username</InputLabel>
+            <Input type="text" name="username" aria-label="username" />
+          </FormControl>
           <FormControl>
             <InputLabel>Password</InputLabel>
             <Input
@@ -82,14 +73,12 @@ const Login = ({ user, login }) => {
                   </Link>
                 </InputAdornment>
               }
-              className={loginClasses.input}
+              className={classes.input}
               required
             />
           </FormControl>
-          <Box className={loginClasses.buttonSpace}>
-          </Box>
-        </form>
-      </Container>
+        </Form>
+      </Box>
     </Box>
   );
 };

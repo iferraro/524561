@@ -4,7 +4,8 @@ import {
   Box,
   FormControl,
   FormHelperText,
-  TextField,
+  Input,
+  InputLabel,
   useMediaQuery,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -56,6 +57,7 @@ const Signup = ({ user, register }) => {
       flexDirection: "column",
       alignItems: "center",
       width: "100%",
+      height: "100%",
     },
     formSideSmall: {
       display: "flex",
@@ -63,8 +65,9 @@ const Signup = ({ user, register }) => {
       justifyContent: "center",
       alignItems: "center",
       width: "100%",
+      height: "100%",
     },
-    textField: {
+    input: {
       height: 66,
       marginBottom: 40,
       fontSize: 14,
@@ -78,7 +81,7 @@ const Signup = ({ user, register }) => {
 
   return (
     <Box className={smallScreen ? classes.rootSmall : classes.root}>
-      <ThreeFriends smallScreen={smallScreen} />
+      <ThreeFriends signupHeight={795} smallScreen={smallScreen} />
       <Box className={smallScreen ? classes.formSideSmall : classes.formSide}>
         <TopLinePrompt
           question="Already have an account?"
@@ -93,42 +96,43 @@ const Signup = ({ user, register }) => {
           onSubmit={handleRegister}
         >
           <FormControl>
-            <TextField
+            <InputLabel>Username</InputLabel>
+            <Input
               type="text"
               name="username"
-              label="Username"
               aria-label="username"
-              className={classes.textField}
+              className={classes.input}
               required
             />
           </FormControl>
           <FormControl>
-            <TextField
+            <InputLabel>E-mail address</InputLabel>
+            <Input
               type="email"
               name="email"
               label="E-mail address"
               aria-label="e-mail address"
-              className={classes.textField}
+              className={classes.input}
               required
             />
           </FormControl>
           <FormControl error={!!formErrorMessage.confirmPassword}>
-            <TextField
+            <InputLabel>Password</InputLabel>
+            <Input
               type="password"
               name="password"
-              label="Password"
               aria-label="password"
               inputProps={{ minLength: 6 }}
-              className={classes.textField}
+              className={classes.input}
               required
             />
             <FormHelperText>{formErrorMessage.confirmPassword}</FormHelperText>
           </FormControl>
           <FormControl error={!!formErrorMessage.confirmPassword}>
-            <TextField
+            <InputLabel>Confirm Password</InputLabel>
+            <Input
               type="password"
               name="confirmPassword"
-              label="Confirm Password"
               aria-label="confirm password"
               inputProps={{ minLength: 6 }}
               required

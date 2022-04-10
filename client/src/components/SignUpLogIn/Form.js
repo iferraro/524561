@@ -8,7 +8,6 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     width: 380,
     padding: 0,
-    // margin: "86px 0 106px 97px",
     marginTop: 86,
     marginLeft: 97,
     marginBottom: 106,
