@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
   Box,
-  Container,
   FormControl,
   FormHelperText,
   TextField,
@@ -45,12 +44,12 @@ const Signup = ({ user, register }) => {
     root: {
       display: "flex",
       flexDirection: "row",
-      height: "100%"
+      height: "100%",
     },
     rootSmall: {
       display: "flex",
       flexDirection: "column",
-      height: "100%"
+      height: "100%",
     },
     formSide: {
       display: "flex",
@@ -61,9 +60,9 @@ const Signup = ({ user, register }) => {
     formSideSmall: {
       display: "flex",
       flexDirection: "column",
+      justifyContent: "center",
       alignItems: "center",
       width: "100%",
-      padding: "30px 0",
     },
     textField: {
       height: 66,
@@ -80,9 +79,7 @@ const Signup = ({ user, register }) => {
   return (
     <Box className={smallScreen ? classes.rootSmall : classes.root}>
       <ThreeFriends smallScreen={smallScreen} />
-      <Container
-        className={smallScreen ? classes.formSideSmall : classes.formSide}
-      >
+      <Box className={smallScreen ? classes.formSideSmall : classes.formSide}>
         <TopLinePrompt
           question="Already have an account?"
           href="/login"
@@ -139,7 +136,7 @@ const Signup = ({ user, register }) => {
             <FormHelperText>{formErrorMessage.confirmPassword}</FormHelperText>
           </FormControl>
         </Form>
-      </Container>
+      </Box>
     </Box>
   );
 };

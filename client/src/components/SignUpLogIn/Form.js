@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, Typography, Button } from "@material-ui/core";
+import { Container, Typography, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
@@ -7,7 +7,18 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     width: 380,
-    padding: 0
+    padding: 0,
+    // margin: "86px 0 106px 97px",
+    marginTop: 86,
+    marginLeft: 97,
+    marginBottom: 106,
+  },
+  rootSmall: {
+    display: "flex",
+    flexDirection: "column",
+    width: 350,
+    padding: 0,
+    marginBottom: 106,
   },
   welcomeText: {
     fontSize: 26,
@@ -17,30 +28,6 @@ const useStyles = makeStyles(() => ({
   formElement: {
     display: "flex",
     flexDirection: "column",
-  },
-  formsSignup: {
-    display: "flex",
-    flexDirection: "column",
-    width: 380,
-    marginTop: 20,
-  },
-  formsSignupSmall: {
-    display: "flex",
-    flexDirection: "column",
-    width: 350,
-    marginTop: 20,
-  },
-  formsLogin: {
-    display: "flex",
-    flexDirection: "column",
-    width: 380,
-    marginTop: 86,
-  },
-  formsLoginSmall: {
-    display: "flex",
-    flexDirection: "column",
-    width: 350,
-    marginTop: 86,
   },
   //   buttonSpace: {
   //     display: "flex",
@@ -63,7 +50,7 @@ const useStyles = makeStyles(() => ({
 const Form = ({ smallScreen, welcomeText, buttonText, onSubmit, children }) => {
   const classes = useStyles();
   return (
-    <Container className={classes.root}>
+    <Container className={smallScreen ? classes.rootSmall : classes.root}>
       <Typography className={classes.welcomeText}>{welcomeText}</Typography>
       <form onSubmit={onSubmit} className={classes.formElement}>
         {children}
