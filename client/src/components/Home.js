@@ -194,6 +194,9 @@ const Home = ({ user, logout }) => {
     const fetchConversations = async () => {
       try {
         const { data } = await axios.get("/api/conversations");
+        data.map((convo) => {
+          return convo.messages.reverse();
+        });
         setConversations(data);
       } catch (error) {
         console.error(error);
