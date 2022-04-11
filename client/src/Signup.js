@@ -6,7 +6,6 @@ import {
   FormHelperText,
   Input,
   InputLabel,
-  useMediaQuery,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -16,7 +15,7 @@ import {
   Form,
 } from "./components/SignUpLogIn/index";
 
-const Signup = ({ user, register }) => {
+const Signup = ({ user, register, smallScreen }) => {
   const history = useHistory();
 
   const [formErrorMessage, setFormErrorMessage] = useState({});
@@ -76,8 +75,6 @@ const Signup = ({ user, register }) => {
   }));
 
   const classes = useStyles();
-
-  const smallScreen = useMediaQuery("(max-width:1023px)");
 
   return (
     <Box className={smallScreen ? classes.rootSmall : classes.root}>

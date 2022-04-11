@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useMediaQuery } from "@material-ui/core";
 import { Route, Switch, withRouter } from "react-router-dom";
 import Signup from "./Signup.js";
 import Login from "./Login.js";
@@ -13,6 +14,7 @@ const Routes = (props) => {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const smallScreen = useMediaQuery("(max-width:1023px)");
 
   const login = async (credentials) => {
     try {
@@ -98,11 +100,15 @@ const Routes = (props) => {
       <Switch>
         <Route
           path="/login"
-          render={() => <Login user={user} login={login} />}
+          render={() => (
+            <Login user={user} login={login} smallScreen={smallScreen} />
+          )}
         />
         <Route
           path="/register"
-          render={() => <Signup user={user} register={register} />}
+          render={() => (
+            <Signup user={user} register={register} smallScreen={smallScreen} />
+          )}
         />
         <Route
           exact

@@ -7,7 +7,6 @@ import {
   InputLabel,
   InputAdornment,
   Link,
-  useMediaQuery,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -17,7 +16,7 @@ import {
   Form,
 } from "./components/SignUpLogIn/index";
 
-const Login = ({ user, login }) => {
+const Login = ({ user, login, smallScreen }) => {
   const history = useHistory();
 
   const handleLogin = async (event) => {
@@ -73,8 +72,6 @@ const Login = ({ user, login }) => {
   }));
 
   const classes = useStyles();
-
-  const smallScreen = useMediaQuery("(max-width:1023px)");
 
   return (
     <Box className={smallScreen ? classes.rootSmall : classes.root}>

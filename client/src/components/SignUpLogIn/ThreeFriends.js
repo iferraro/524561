@@ -5,19 +5,15 @@ import BGImg from "../../bg-img.png";
 import Bubble from "../../bubble.svg";
 
 const ThreeFriends = ({ smallScreen }) => {
-  let rootScrollHeight = 0;
-
   const [pictureHeight, setPictureHeight] = useState(0);
 
   useEffect(() => {
-    rootScrollHeight = document.getElementById("root").scrollHeight;
+    const rootScrollHeight = document.getElementById("root").scrollHeight;
     setPictureHeight(rootScrollHeight);
-    window.onresize = renderPictureHeight;
+    window.onresize = () => {
+      setPictureHeight(Math.max(rootScrollHeight, window.innerHeight));
+    };
   }, []);
-
-  const renderPictureHeight = () => {
-    setPictureHeight(Math.max(rootScrollHeight, window.innerHeight));
-  };
 
   const useStyles = makeStyles(() => ({
     root: {
