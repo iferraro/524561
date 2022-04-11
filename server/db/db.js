@@ -1,5 +1,4 @@
-require("dotenv").config();
-const { Sequelize } = require("@sequelize/core");
+const Sequelize = require("sequelize");
 
 const db = new Sequelize(
   "postgresql://postgres:Phyll0ph@ga@localhost:5432/messenger",

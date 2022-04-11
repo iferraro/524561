@@ -9,7 +9,6 @@
     "seed": "node db/seed.js"
   },
   "dependencies": {
-    "@sequelize/core": "^7.0.0-alpha.10",
     "connect-session-sequelize": "^7.0.4",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",

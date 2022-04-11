@@ -8,7 +8,7 @@ import { SidebarContainer } from "../components/Sidebar";
 import { ActiveChat } from "../components/ActiveChat";
 import { SocketContext } from "../context/socket";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
   },
@@ -62,9 +62,9 @@ const Home = ({ user, logout }) => {
     });
   };
 
-  const postMessage = async (body) => {
+  const postMessage = (body) => {
     try {
-      const data = await saveMessage(body);
+      const data = saveMessage(body);
 
       if (!body.conversationId) {
         addNewConvo(body.recipientId, data.message);
@@ -80,6 +80,7 @@ const Home = ({ user, logout }) => {
 
   const addNewConvo = useCallback(
     (recipientId, message) => {
+<<<<<<< HEAD
       setConversations((currentConvos) => {
         return currentConvos.map((convo) => {
           if (convo.otherUser.id === recipientId) {
@@ -92,16 +93,23 @@ const Home = ({ user, logout }) => {
             return convo;
           }
         });
+=======
+      conversations.forEach((convo) => {
+        if (convo.otherUser.id === recipientId) {
+          convo.messages.push(message);
+          convo.latestMessageText = message.text;
+          convo.id = message.conversationId;
+        }
+>>>>>>> issuetwo
       });
+      setConversations(conversations);
     },
-    [setConversations]
+    [setConversations, conversations]
   );
-
   const addMessageToConversation = useCallback(
     (data) => {
       // if sender isn't null, that means the message needs to be put in a brand new convo
       const { message, sender = null } = data;
-
       if (sender !== null) {
         const newConvo = {
           id: message.conversationId,
@@ -112,6 +120,7 @@ const Home = ({ user, logout }) => {
         setConversations((prev) => [newConvo, ...prev]);
       }
 
+<<<<<<< HEAD
       setConversations((currentConvos) => {
         return currentConvos.map((convo) => {
           if (convo.id === message.conversationId) {
@@ -123,9 +132,17 @@ const Home = ({ user, logout }) => {
             return convo;
           }
         });
+=======
+      conversations.forEach((convo) => {
+        if (convo.id === message.conversationId) {
+          convo.messages.push(message);
+          convo.latestMessageText = message.text;
+        }
+>>>>>>> issuetwo
       });
+      setConversations(conversations);
     },
-    [setConversations]
+    [setConversations, conversations]
   );
 
   const setActiveChat = (username) => {
