@@ -1,13 +1,21 @@
-import React, { useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
-  Grid,
   Box,
-  Typography,
-  Button,
   FormControl,
-  TextField,
-} from '@material-ui/core';
+  Input,
+  InputLabel,
+  InputAdornment,
+  Link,
+  useMediaQuery,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  ThreeFriends,
+  TopLinePrompt,
+  Form,
+} from "./components/SignUpLogIn/index";
+
 
 const Login = ({ user, login }) => {
   const history = useHistory();
@@ -26,44 +34,98 @@ const Login = ({ user, login }) => {
     if (user && user.id) history.push('/home');
   }, [user, history]);
 
+  const useStyles = makeStyles(() => ({
+    root: {
+      display: "flex",
+      flexDirection: "row",
+      height: "100%",
+    },
+    rootSmall: {
+      display: "flex",
+      flexDirection: "column",
+      height: "100%",
+    },
+    formSide: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      width: "100%",
+      height: "100%",
+    },
+    formSideSmall: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      height: "100%",
+    },
+    input: {
+      height: 66,
+      marginBottom: 40,
+      fontSize: 14,
+      fontWeight: 600,
+    },
+    forgotText: {
+      fontSize: 12,
+      fontWeight: 600,
+    },
+  }));
+
+  const classes = useStyles();
+
+  const smallScreen = useMediaQuery("(max-width:1023px)");
+
   return (
-    <Grid container justifyContent="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Link href="/register" to="/register">
-            <Button>Register</Button>
-          </Link>
-        </Grid>
-        <form onSubmit={handleLogin}>
-          <Grid>
-            <Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                />
-              </FormControl>
-            </Grid>
-            <FormControl margin="normal" required>
-              <TextField
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
-              />
-            </FormControl>
-            <Grid>
-              <Button type="submit" variant="contained" size="large">
-                Login
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
+    <Box className={smallScreen ? classes.rootSmall : classes.root}>
+      <ThreeFriends smallScreen={smallScreen} />
+      <Box className={smallScreen ? classes.formSideSmall : classes.formSide}>
+        <TopLinePrompt
+          question="Don't have an account?"
+          href="/register"
+          buttonText="Create account"
+          smallScreen={smallScreen}
+        />
+        <Form
+          welcomeText="Welcome Back!"
+          buttonText="Login"
+          smallScreen={smallScreen}
+          onSubmit={handleLogin}
+        >
+          <FormControl margin="normal" required>
+            <InputLabel>Username</InputLabel>
+            <Input
+              type="text"
+              name="username"
+              aria-label="username"
+              className={classes.input}
+            />
+          </FormControl>
+          <FormControl>
+            <InputLabel>Password</InputLabel>
+            <Input
+              type="password"
+              name="password"
+              aria-label="password"
+              endAdornment={
+                <InputAdornment position="end">
+                  <Link
+                    href="/"
+                    underline="none"
+                    color="primary"
+                    className={classes.forgotText}
+                  >
+                    Forgot?
+                  </Link>
+                </InputAdornment>
+              }
+              className={classes.input}
+              required
+            />
+          </FormControl>
+        </Form>
       </Box>
-    </Grid>
+    </Box>
   );
 };
 
