@@ -94,7 +94,12 @@ const Login = ({ user, login }) => {
         >
           <FormControl margin="normal" required>
             <InputLabel>Username</InputLabel>
-            <Input type="text" name="username" aria-label="username" />
+            <Input
+              type="text"
+              name="username"
+              aria-label="username"
+              className={classes.input}
+            />
           </FormControl>
           <FormControl>
             <InputLabel>Password</InputLabel>

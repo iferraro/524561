@@ -134,6 +134,7 @@ const Signup = ({ user, register }) => {
               name="confirmPassword"
               aria-label="confirm password"
               inputProps={{ minLength: 6 }}
+              className={classes.input}
               required
             />
             <FormHelperText>{formErrorMessage.confirmPassword}</FormHelperText>
