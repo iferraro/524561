@@ -25,7 +25,6 @@ const ThreeFriends = ({ smallScreen }) => {
       width: (425 * pictureHeight) / 700,
       height: pictureHeight,
       padding: 0,
-      backgroundColor: "magenta",
     },
     rootSmall: {
       position: "relative",
