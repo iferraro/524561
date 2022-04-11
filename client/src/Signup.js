@@ -81,7 +81,7 @@ const Signup = ({ user, register }) => {
 
   return (
     <Box className={smallScreen ? classes.rootSmall : classes.root}>
-      <ThreeFriends signupHeight={795} smallScreen={smallScreen} />
+      <ThreeFriends smallScreen={smallScreen} />
       <Box className={smallScreen ? classes.formSideSmall : classes.formSide}>
         <TopLinePrompt
           question="Already have an account?"
@@ -110,7 +110,6 @@ const Signup = ({ user, register }) => {
             <Input
               type="email"
               name="email"
-              label="E-mail address"
               aria-label="e-mail address"
               className={classes.input}
               required

@@ -4,42 +4,28 @@ import { makeStyles } from "@material-ui/core/styles";
 import BGImg from "../../bg-img.png";
 import Bubble from "../../bubble.svg";
 
-const ThreeFriends = ({ signupHeight, smallScreen }) => {
+const ThreeFriends = ({ smallScreen }) => {
+  let rootScrollHeight = 0;
+
   const [pictureHeight, setPictureHeight] = useState(0);
 
   useEffect(() => {
-    setPictureHeight(
-      Math.max(
-        signupHeight,
-        document.documentElement.getBoundingClientRect().height
-      )
-    );
+    rootScrollHeight = document.getElementById("root").scrollHeight;
+    setPictureHeight(rootScrollHeight);
+    window.onresize = renderPictureHeight;
   }, []);
 
   const renderPictureHeight = () => {
-    setPictureHeight(
-      Math.max(
-        signupHeight,
-        document.documentElement.getBoundingClientRect().height // this must actually be height of formside
-      )
-    );
-    console.log(window.innerHeight);
-    console.log(document.documentElement.scrollHeight);
+    setPictureHeight(Math.max(rootScrollHeight, window.innerHeight));
   };
-
-  useEffect(() => {
-    window.addEventListener("resize", renderPictureHeight);
-    return () => window.removeEventListener("resize", renderPictureHeight);
-  });
 
   const useStyles = makeStyles(() => ({
     root: {
       position: "relative",
       width: (425 * pictureHeight) / 700,
-      // height: pictureHeight,
-      minHeight: signupHeight,
+      height: pictureHeight,
       padding: 0,
-      // backgroundColor: "magenta",
+      backgroundColor: "magenta",
     },
     rootSmall: {
       position: "relative",

@@ -34,7 +34,43 @@ const Login = ({ user, login }) => {
     if (user && user.id) history.push("/home");
   }, [user, history]);
 
-  const useStyles = makeStyles(() => ({}));
+  const useStyles = makeStyles(() => ({
+    root: {
+      display: "flex",
+      flexDirection: "row",
+      height: "100%",
+    },
+    rootSmall: {
+      display: "flex",
+      flexDirection: "column",
+      height: "100%",
+    },
+    formSide: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      width: "100%",
+      height: "100%",
+    },
+    formSideSmall: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      height: "100%",
+    },
+    input: {
+      height: 66,
+      marginBottom: 40,
+      fontSize: 14,
+      fontWeight: 600,
+    },
+    forgotText: {
+      fontSize: 12,
+      fontWeight: 600,
+    },
+  }));
 
   const classes = useStyles();
 
@@ -68,7 +104,12 @@ const Login = ({ user, login }) => {
               aria-label="password"
               endAdornment={
                 <InputAdornment position="end">
-                  <Link href="/" underline="none" color="primary">
+                  <Link
+                    href="/"
+                    underline="none"
+                    color="primary"
+                    className={classes.forgotText}
+                  >
                     Forgot?
                   </Link>
                 </InputAdornment>
